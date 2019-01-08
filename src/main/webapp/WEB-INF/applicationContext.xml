@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<beans:beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/security 
+                           http://www.springframework.org/schema/security/spring-security-4.2.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.3.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<beans:import
+		resource="classpath:/ec/edu/utpl/spring/springViewScope.xml" />
+	<context:property-placeholder
+		location="classpath:/ec/edu/utpl/hibernate/configuracion.properties" />
+	<context:component-scan
+		base-package="ec.edu.utpl" />
+	<context:annotation-config />
+
+	<security:http pattern="/login.xhtml" security="none" />
+	<security:http pattern="/error/**" security="none" />
+	<security:http pattern="/javax.faces.resource/**" security="none" />
+
+	<security:http auto-config="false" use-expressions="true">
+
+		<security:custom-filter
+			ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+			
+		<security:intercept-url pattern="/administracion/**" access="isAuthenticated()" />
+
+		<security:form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?incorrecto=true" default-target-url="/administracion/dashboard.xhtml"
+			username-parameter="txtUsuario" password-parameter="txtClave" always-use-default-target="true" login-processing-url="/j_spring_security_check" />
+		
+		<security:logout logout-url="/j_spring_security_logout" invalidate-session="true" delete-cookies="JSESSIONID" logout-success-url="/" />
+		
+		<security:session-management invalid-session-url="/error/sessionExpirada.xhtml" session-authentication-error-url="/error/accesoDenegado.xhtml">
+			<!-- <security:concurrency-control expired-url="/error/sessionExpirada.xhtml" max-sessions="1"/> -->
+		</security:session-management>
+		
+		<security:remember-me remember-me-parameter="ckbxRecuerdame" key="unique-and-secret" remember-me-cookie="remember-me-cookie-name"
+        token-validity-seconds="86400" token-repository-ref="implementacionPersistenciaTokenDao" user-service-ref="implementacionDetalleUsuarioServicio" />
+		
+		<security:csrf disabled="true" />
+		
+		<security:headers>
+			<security:frame-options policy="SAMEORIGIN" />
+		</security:headers>
+		
+		<security:anonymous key="anonymous-security" />
+	</security:http>
+
+	<beans:bean id="exceptionTranslationFilter"
+		class="org.springframework.security.web.access.ExceptionTranslationFilter">
+		<beans:constructor-arg>
+			<beans:ref bean="authenticationEntryPoint" />
+		</beans:constructor-arg>
+		<beans:property name="accessDeniedHandler"
+			ref="springAccessDeniedHandler" />
+	</beans:bean>
+
+	<beans:bean id="springAccessDeniedHandler" class="ec.edu.utpl.springsecurity.util.SpringAccessDeniedHandler">
+		<beans:property name="loginPath" value="/error/accesoDenegado.xhtml" />
+		<beans:property name="contextRelative" value="false" />
+	</beans:bean>
+
+	<beans:bean id="authenticationEntryPoint" class="ec.edu.utpl.springsecurity.util.SpringLoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/login.xhtml" />
+		<beans:property name="redirectStrategy" ref="springRedirectStrategy" />
+	</beans:bean>
+
+	<beans:bean id="springRedirectStrategy" class="ec.edu.utpl.springsecurity.util.SpringRedirectStrategy" />
+
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="implementacionDetalleUsuarioServicio" /> 
+	</security:authentication-manager>
+
+	<!-- CONFIGURATION C3P0 -->
+	<beans:bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<beans:property name="driverClass"
+			value="${driverClass}" />
+		<beans:property name="jdbcUrl" value="${jdbcUrl}" />
+		<beans:property name="user" value="${user}" />
+		<beans:property name="password" value="${password}" />
+
+		<!-- pool sizing -->
+		<beans:property name="initialPoolSize" value="3" />
+		<beans:property name="minPoolSize" value="6" />
+		<beans:property name="maxPoolSize" value="25" />
+		<beans:property name="acquireIncrement" value="3" />
+		<beans:property name="maxStatements" value="0" />
+		<!-- retries -->
+		<beans:property name="acquireRetryAttempts" value="30" />
+		<beans:property name="acquireRetryDelay" value="1000" /> <!-- 1s -->
+		<beans:property name="breakAfterAcquireFailure"
+			value="false" />
+		<!-- refreshing connections -->
+		<beans:property name="maxIdleTime" value="180" /> <!-- 3min -->
+		<beans:property name="maxConnectionAge" value="3600" /> <!-- 1h -->
+		<!-- timeouts and testing -->
+		<beans:property name="checkoutTimeout" value="5000" /> <!-- 5s -->
+		<beans:property name="idleConnectionTestPeriod"
+			value="60" /> <!-- 60 -->
+		<beans:property name="testConnectionOnCheckout"
+			value="true" />
+		<beans:property name="preferredTestQuery"
+			value="SELECT 1" />
+		<beans:property name="testConnectionOnCheckin"
+			value="true" />
+	</beans:bean>
+
+	<!-- CONFIGURATION HIBERNATE -->
+	<beans:bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="configLocation">
+			<beans:value>classpath:/ec/edu/utpl/hibernate/hibernate.cfg.xml
+			</beans:value>
+		</beans:property>
+	</beans:bean>
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<beans:property name="sessionFactory"
+			ref="sessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="WebSecurityExpressionHandler"
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
+	<beans:bean id="httpFirewall"
+		class="org.springframework.security.web.firewall.StrictHttpFirewall"
+		p:allowSemicolon="true" />
+
+	<security:http-firewall ref="httpFirewall" />
+
+</beans:beans>
