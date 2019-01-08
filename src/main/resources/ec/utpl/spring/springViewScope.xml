@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	<beans:bean
+		class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<beans:property name="scopes">
+			<beans:map>
+				<beans:entry key="view">
+					<beans:bean class="ec.edu.utpl.spring.scope.ViewScope" />
+				</beans:entry>
+			</beans:map>
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>

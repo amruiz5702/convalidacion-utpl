@@ -200,12 +200,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>${jmail-version}</version>
-		</dependency>
 
 	</dependencies>
 	<repositories>

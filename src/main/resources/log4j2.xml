@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration status="all">
+	<Properties>
+		<Property name="baseDir">/logs-app/convalidacion</Property>
+	</Properties>
+	<Appenders>
+		<Servlet name="Servlet">
+			<PatternLayout pattern="[%-5level] %d{DATE} %c{10} %M:%L %msg%ex%n" />
+		</Servlet>
+
+		<RollingFile name="DailyRollingLog" fileName="${baseDir}/log.log"
+			filePattern="${baseDir}/$${date:yyyy-MM}/prime_hms-%d{yyyy-MM-dd-HH-mm}.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<PatternLayout pattern="[%-5level] %d{DATE} %c{10} %M:%L %msg%ex%n" />
+		</RollingFile>
+		<RollingFile name="DailyRollingHTML" fileName="${baseDir}/log.html"
+			filePattern="${baseDir}/$${date:yyyy-MM}/prime_hms-%d{yyyy-MM-dd-HH-mm}.html">
+			<HTMLLayout charset="UTF-8" title="convalidacion"
+				locationInfo="true" contentType="text/html" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+		<!--<RollingFile name="DailyRollingXML" fileName="${baseDir}/log.xml" filePattern="${baseDir}/$${date:yyyy-MM}/prime_hms-%d{yyyy-MM-dd-HH-mm}.xml"> 
+			<XMLLayout charset="UTF-8" properties="true" LocationInfo="true" complete="true"/> 
+			<Policies> <TimeBasedTriggeringPolicy/> </Policies> </RollingFile> -->
+	</Appenders>
+	<Loggers>
+		<Root level="INFO">
+			<AppenderRef ref="Servlet" />
+			<!-- <AppenderRef ref="Console"/> -->
+			<AppenderRef ref="DailyRollingLog" />
+			<AppenderRef ref="DailyRollingHTML" />
+			<!--<AppenderRef ref="DailyRollingXML"/> -->
+		</Root>
+	</Loggers>
+</Configuration>  
