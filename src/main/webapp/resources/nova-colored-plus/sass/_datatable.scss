@@ -1,0 +1,108 @@
+body {
+
+     .ui-datatable {
+        @include  border-radius(5px);
+        border: solid 1px $dataTableBorderColor;   
+        background-color: $dataTableBgColor;
+        color: $fontColorDefault;
+
+       .ui-datatable-header, .ui-datatable-footer {
+            background: none;
+            border:none;
+            text-align: left;
+        }
+
+        .ui-datatable-tablewrapper {
+            padding: 4px;
+
+            thead{
+                tr{
+                    th{
+                        @include datatable-head-footer;
+
+                        .ui-column-title{
+                            font-weight: bold;
+                        }
+                        &.ui-state-active {
+                            @include datatable-row-ui-state-highlight;
+                        }                   
+
+                    }
+                   
+                }
+            }
+         
+
+            tfoot{
+                tr{
+                    td{
+                        @include datatable-head-footer;
+                    }
+                }
+            }
+
+            tbody{
+                tr{
+                    td{
+                        color: $fontColorDefault;
+                        border: solid 1px $dataTableRowBorderColor;
+                        height: 38px;
+                    }
+                   
+                }
+            }
+
+            .ui-datatable-data > tr
+            {
+                &.ui-datatable-even {
+                    background-color: $dataTableEvenBgColor;
+                }
+                &.ui-datatable-odd {
+                    background-color: $dataTableOddBgColor;
+                }
+                &.ui-state-highlight {
+                   @include datatable-row-ui-state-highlight;
+                    td{
+                        color: $colorWhite;   
+                    }            
+                }
+                &.ui-state-hover {
+                    border: 1px solid #c8c8c8;
+                    background-color: #7daed6;
+                    td{
+                        color: $colorWhite;   
+                    } 
+                 }
+                 &.ui-state-error{
+                    @include datatable-row-ui-state-highlight;
+                    td{
+                        color: $colorWhite;   
+                    } 
+                }
+            }
+           
+        }     
+
+        .ui-paginator {
+            background-color: $dataTablePaginatorBgColor;
+            border: none;
+
+           &.ui-paginator-bottom {
+                border-top: solid 1px #E8EDF2;
+                border-bottom: solid 1px #E8EDF2;
+              }
+            .ui-paginator-prev{
+                -webkit-transform: none;
+                -moz-transform: none;
+                -ms-transform: none;
+                -o-transform: none;
+                transform: none;
+                &:before {
+                    content: "\e931";
+                }
+            }
+        }   
+        
+
+    }
+}

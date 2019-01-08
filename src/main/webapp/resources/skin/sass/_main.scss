@@ -1,0 +1,497 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+h1,h2,h3,h4{
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    hyphens: auto;   
+}
+
+.main-body {
+    font-family: $fontFamilyDefault;
+    font-size: $fontSizeDefault; 
+    background-color: #edf0f5;
+    .wrapper{
+        
+        /*TOP BAR*/
+        .topbar{
+            font-family: $fontFamilyRobotoLight;
+            background-color: #003f72;
+            border-bottom: 3px solid #eaab00;
+            width: 100%;
+            transition: all 1s ease;   
+
+            @media screen and (max-width: 920px){
+                border-bottom: none;
+            }
+
+            .topbar-content{
+                width: 90%;
+                margin: 0 auto;
+                max-width: 1600px;    
+        
+                &.flex{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-flow: wrap;    
+                }
+
+                .logo {
+                    width: 10%;
+                    
+                    img {
+                        width: 80%;
+                        height: auto;
+                    }
+        
+                    @media  screen and (max-width: 920px)  {
+                        display: none;
+                    }
+                }
+
+                .menu{
+                    width: 87%;    
+        
+                    @media screen and (max-width: 920px){
+                        width: 100%;
+                    }  
+
+                    .button-menu {
+                        display: none;    
+        
+                        p {
+                            color: white;
+                            padding: 0;    
+                            font-size: 20px;
+                            line-height: 1.3;
+                        }     
+
+                        @media  screen and (max-width: 920px)  {
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+        
+                        .button-menu-toggle{
+                            @media  screen and (max-width: 920px)  {
+                                display: inline-flex;
+                                padding: 1em;
+                                color:white;
+                                background-color: #eaab00;
+                            }
+                        }
+                    }
+                    
+                    .nav-menu {
+                
+                        @media screen and (min-width: 920px) {
+                                display: inline-flex !important;
+                        }
+        
+                        @media screen and (max-width: 920px)  {
+                            display: none;
+                        }
+        
+                        .nav-items {
+                            display: flex;   
+        
+                            @media  screen and (max-width: 920px)  {
+                                display: block;
+                            }
+        
+                            a{
+                                font-family: $fontFamilyRobotoLight;
+                                display: block;
+                                padding: 1em 0.6em;
+                                color: white;
+                                text-transform: uppercase;
+                                font-size: 12pt;
+                                font-weight: 300;
+            
+                                &:hover, &.active {
+                                    background-color: rgba(0,0,0,.15);
+                                    color: #eaab00;                        
+                                }
+            
+                                @media (min-width: 921px) and (max-width: 1100px) { 
+                                    display: block;
+                                    padding: 1em 0.3em;
+                                    font-size: 10pt;
+                                }
+            
+                            }
+        
+                        }
+                        
+                    }
+
+                    .user-login{
+                        float: right;
+
+                        @media  screen and (max-width: 920px)  {
+                            display: none;
+                        }
+
+                        label{
+                            font-family: $fontFamilyRobotoLight;
+                            display: block;
+                            padding: 1em 0.6em;
+                            color: white;
+                            text-transform: uppercase;
+                            font-size: 12pt;
+                            font-weight: 300;
+                        }
+                    }
+                }     
+            }
+        
+        }
+        
+        .main {
+            @include transition(margin-left .3s);
+            padding: 0px 16px 16px 16px;
+
+            .card {
+                background-color: #ffffff;
+                padding: 1em;
+                margin-top: 16px;
+                
+                h1{
+                    margin: 0 0 .5em 0;
+                    color: #003f72;
+                    border-bottom: 1px solid #d5d5d5;
+                    padding: .1em;
+                    font-size: 24px;
+                }
+               
+                /*INDEX HTML*/
+                .block-contenido {
+                    text-align: justify;    
+                    > div{
+                        width: 85%;
+                        margin: 20px auto;
+                    }
+                        
+                    h2{
+                        
+                        font-family: $fontFamilyMontserratLight;
+                        font-size: 26pt;
+                        color: #003f72;
+                        padding-bottom: 1em;
+                        
+                        @media screen and (max-width: 700px) {
+                            font-size: 20pt !important;
+                        }
+
+                        strong{
+                            font-family: $fontFamilyMontserratBold;
+                        }
+                    }
+                    
+                    p {
+                        font-family: $fontFamilyRobotoLight;
+                        font-size: 16pt;
+                        line-height: 1.3;
+                        color: #737373;
+                        padding: 0.3em 0;
+                    }
+
+                    .boton {
+
+                        .field-item {
+                            display: inline-flex;
+                            background-color: #eaab00;
+                            margin-top: 2em;
+                        }
+
+                        a {
+                            font-family: 'Montserrat', sans-serif;
+                            font-size: 14pt !important;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                            padding: 0.5em;
+                            color: white !important;
+                        }
+                            
+                        .flecha {    
+                            width: 50px;
+                            overflow: hidden;
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            position: relative;
+                            background-color: white;   
+
+                            .boton-bg {
+                                color: white;
+                                width: 50px;
+                                text-align: center;
+                                position: relative;
+                                right: 0px;
+                                -webkit-transition: right 400ms;
+                                transition: right 400ms;
+                            
+                            }         
+                        }
+                        
+                    }        
+                    
+                    .flecha-azul .flecha {
+                        background-color: #003f72;    
+                    }
+                }
+                
+            }
+           
+        }
+
+    }
+}
+
+.login-body{
+    height: 100%;
+    font-family: $fontFamilyArial;
+    font-size: 16px;
+    margin: 0;
+    padding: 100px 0 0 0;
+    background-image: url('https://www.utpl.edu.ec/sites/default/files/background-estadisticas_1.jpg');
+
+    #login-wrapper {
+        width: 400px;
+        margin: 0 auto;
+        text-align: center;
+
+        .login-header {
+            padding: 0 18px;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-align-items: center;
+            align-items: center;
+
+            .login-header-logo{
+                min-width: 1px;
+
+                img {
+                    max-width: 100%;
+                    height: auto;
+                    vertical-align: middle;
+                    border: 0;
+                    -ms-interpolation-mode: bicubic;                
+                }
+            }
+        }
+        
+        #login-container {
+            margin-top: 20px;
+            box-sizing: border-box;
+            height: 280px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+            padding: 2em;
+            text-align: center;
+            color: #4f575b;
+
+            .title {
+                font-size: 20px;
+                display: block;
+                margin-bottom: 10px;            
+            }
+            
+            input, button {
+                font-size: 16px;          
+            }
+        }    
+    }
+}
+
+
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6,
+	.col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+	float: left;
+}
+
+.col-xs-12 {
+	width: 100% !important;
+}
+
+.col-xs-11 {
+	width: 91.66666667% !important;
+}
+
+.col-xs-10 {
+	width: 83.33333333% !important;
+}
+
+.col-xs-9 {
+	width: 75% !important;
+}
+
+.col-xs-8 {
+	width: 66.66666667% !important;
+}
+
+.col-xs-7 {
+	width: 58.33333333% !important;
+}
+
+.col-xs-6 {
+	width: 50% !important;
+}
+
+.col-xs-5 {
+	width: 41.66666667% !important;
+}
+
+.col-xs-4 {
+	width: 33.33333333% !important;
+}
+
+.col-xs-3 {
+	width: 25% !important;
+}
+
+.col-xs-2 {
+	width: 16.66666667% !important;
+}
+
+.col-xs-1 {
+	width: 8.33333333% !important;
+}
+
+@media ( min-width : 768px) {
+	.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
+		.col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+		float: left;
+	}
+	.col-sm-12 {
+		width: 100% !important;
+	}
+	.col-sm-11 {
+		width: 91.66666667% !important;
+	}
+	.col-sm-10 {
+		width: 83.33333333% !important;
+	}
+	.col-sm-9 {
+		width: 75% !important;
+	}
+	.col-sm-8 {
+		width: 66.66666667% !important;
+	}
+	.col-sm-7 {
+		width: 58.33333333% !important;
+	}
+	.col-sm-6 {
+		width: 50% !important;
+	}
+	.col-sm-5 {
+		width: 41.66666667% !important;
+	}
+	.col-sm-4 {
+		width: 33.33333333% !important;
+	}
+	.col-sm-3 {
+		width: 25% !important;
+	}
+	.col-sm-2 {
+		width: 16.66666667% !important;
+	}
+	.col-sm-1 {
+		width: 8.33333333% !important;
+	}
+}
+
+@media ( min-width : 992px) {
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+		.col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+		float: left;
+	}
+	.col-md-12 {
+		width: 100% !important;
+	}
+	.col-md-11 {
+		width: 91.66666667% !important;
+	}
+	.col-md-10 {
+		width: 83.33333333% !important;
+	}
+	.col-md-9 {
+		width: 75% !important;
+	}
+	.col-md-8 {
+		width: 66.66666667% !important;
+	}
+	.col-md-7 {
+		width: 58.33333333% !important;
+	}
+	.col-md-6 {
+		width: 50% !important;
+	}
+	.col-md-5 {
+		width: 41.66666667% !important;
+	}
+	.col-md-4 {
+		width: 33.33333333% !important;
+	}
+	.col-md-3 {
+		width: 25% !important;
+	}
+	.col-md-2 {
+		width: 16.66666667% !important;
+	}
+	.col-md-1 {
+		width: 8.33333333% !important;
+	}
+}
+
+@media ( min-width : 1200px) {
+	.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
+		.col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+		float: left;
+	}
+	.col-lg-12 {
+		width: 100% !important;
+	}
+	.col-lg-11 {
+		width: 91.66666667% !important;
+	}
+	.col-lg-10 {
+		width: 83.33333333% !important;
+	}
+	.col-lg-9 {
+		width: 75% !important;
+	}
+	.col-lg-8 {
+		width: 66.66666667% !important;
+	}
+	.col-lg-7 {
+		width: 58.33333333% !important;
+	}
+	.col-lg-6 {
+		width: 50% !important;
+	}
+	.col-lg-5 {
+		width: 41.66666667% !important;
+	}
+	.col-lg-4 {
+		width: 33.33333333% !important;
+	}
+	.col-lg-3 {
+		width: 25% !important;
+	}
+	.col-lg-2 {
+		width: 16.66666667% !important;
+	}
+	.col-lg-1 {
+		width: 8.33333333% !important;
+	}
+}

@@ -1,0 +1,50 @@
+$fontSizeDefault: 12px;
+$fontColorDefault: #737373;
+$fontFamilyDefault: Arial,Helvetica,Tahoma,Verdana,Sans-Serif;
+
+$colorWhite: #FFF;
+
+$dataTableBgColor:#FBFCFD;
+$dataTableBorderColor:#D1D3D4;
+$dataTableHeadBgColor: #DAE8EF;
+$dataTableHeadBorderColor: #C1D5DF;
+$dataTableEvenBgColor: #FBFCFD;
+$dataTableOddBgColor:#F3F6F9;
+$dataTableRowBorderColor: #E5EBF0;
+$dataTableRowBgColorActive: #007AD9;
+$dataTableRowBorderColorActive: #C8C8C8;
+$dataTablePaginatorBgColor: #F3F5F7;
+
+$growlBgInfo: #1578c9;
+$growlBgError:#EF5350;
+$growlBgWarn: #ffc107;
+$growlBgFatal: #ef6262;
+$growlColor: $colorWhite;
+$growlColorIcon: $colorWhite;
+
+/* RedButton */
+$redButton: #b8312e;
+$redButtonBorder: #9c1627;
+$redButtonHover: #d2524f;
+$redButtonActive: #9c1627;
+
+
+@mixin border-radius($val) {
+    -moz-border-radius: $val;
+    -webkit-border-radius: $val;
+    border-radius: $val;
+}
+
+@mixin datatable-head-footer{
+    color: $fontColorDefault;
+    border: solid 1px $dataTableHeadBorderColor;
+    background-color: $dataTableHeadBgColor;
+    height: 28px;
+}
+
+@mixin datatable-row-ui-state-highlight{
+    color: $colorWhite;
+    border: 1px solid $dataTableRowBorderColorActive;
+    background-color: $dataTableRowBgColorActive;
+}
+

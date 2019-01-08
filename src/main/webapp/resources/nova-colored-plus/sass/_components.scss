@@ -1,0 +1,74 @@
+
+body {
+
+  .ui-widget:not(.pi){
+    font-size:  $fontSizeDefault;
+    font-family: $fontFamilyDefault;
+  }
+
+  .ui-widget .ui-widget:not(.pi) {
+    font-size:  $fontSizeDefault;
+    font-family: $fontFamilyDefault;
+  }
+
+  .ui-inputfield {
+    padding: .729em;
+    font-size: 12px;
+  }
+
+  .ui-button {
+    padding: 3.6px;
+
+    &.ui-state-focus {
+      outline:none;
+    }
+
+    &.ui-state-default {
+      &.red-button {
+        background-color: $redButton;
+        border-color: $redButtonBorder;
+
+      &.ui-state-hover {
+        background-color: $redButtonHover;
+      }
+
+      &.ui-state-active {
+        background-color: $redButtonActive;
+      }
+    }
+  }
+}
+
+
+  .ui-datepicker {
+    .ui-datepicker-calendar {
+      font-size: $fontSizeDefault;
+    }
+  }
+
+  .ui-autocomplete-item{    
+    height: 35px;
+  }
+
+  .ui-selectonemenu-panel {
+    .ui-selectonemenu-items{
+      .ui-selectonemenu-item {
+      height: 35px;   
+      padding: .829em .857em;   
+      }
+    }
+  }
+
+  .ui-trigger-calendar {
+    .ui-datepicker-trigger{
+      &.ui-button {
+      top: -10px;
+      }
+    }
+  }
+  .ui-dialog {
+    .ui-dialog-title {
+      font-size: 19px;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+body{
+    .ui-growl{
+        .ui-growl-item-container{	       
+            &.ui-growl-item-container.ui-growl-info {
+                background-color: $growlBgInfo;
+                color: $growlColor;
+                .ui-growl-image {
+                    color: $growlColorIcon;
+                }
+                .ui-icon {
+                    color: $growlColorIcon;                
+                }
+            }
+
+            &.ui-growl-error {
+                background-color:  $growlBgError;
+                color: $growlColor;
+                .ui-growl-image {
+                    color: $growlColorIcon;
+                }
+                .ui-icon {
+                    color: $growlColorIcon;                
+                }
+            }
+
+            &.ui-growl-warn {
+                background-color: $growlBgWarn;
+                color: $growlColor;
+                .ui-growl-image {
+                    color: $growlColorIcon;
+                }
+                .ui-icon {
+                    color: $growlColorIcon;                
+                }
+            }
+            &.ui-growl-fatal {
+                background-color: $growlBgFatal;
+                color: $growlColor;
+                .ui-growl-image {
+                    color: $growlColorIcon;
+                }
+                .ui-icon {
+                    color: $growlColorIcon;                
+                }
+            }
+        }
+    }
+}

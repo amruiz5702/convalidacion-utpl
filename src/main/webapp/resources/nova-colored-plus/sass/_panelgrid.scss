@@ -1,0 +1,7 @@
+.ui-panelgrid {
+    border: 1px solid #c8c8c8;
+    &.ui-panelgrid-blank {
+        border: 0 none;
+        background: none;    
+    }
+}

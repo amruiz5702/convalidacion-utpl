@@ -1,0 +1,19 @@
+$fontFamilyRobotoRegular: 'Roboto Condensed Regular';
+$fontFamilyRobotoLight: 'Roboto Condensed Light';
+
+$fontFamilyMontserratRegular: 'Montserrat Regular';
+$fontFamilyMontserratLight: 'Montserrat Light';
+$fontFamilyMontserratBold: "Montserrat Bold";
+
+$fontFamilyArial: Arial,Helvetica,Tahoma,Verdana,Sans-Serif;
+
+$fontFamilyDefault: $fontFamilyMontserratRegular;
+$fontFamilyDefaultLight: $fontFamilyMontserratLight;
+$fontSizeDefault: 12px;
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
