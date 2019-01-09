@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hm="http://xmlns.jcp.org/jsf/composite/componente">
+
+
+	<div class="ui-g">
+		<div class="ui-g-12">
+			<div class="card">
+
+				<h1>
+					<p:outputLabel value="#{vista.ttloAdministracionAlumnos}"
+						styleClass="fontSize24" />
+				</h1>
+
+				<h:form id="frmLstAlumno">
+
+					<p:fieldset legend="#{vista.ttloBusquedaAlumno}"
+						id="fstBusquedaAlumno">
+						<p:panelGrid columns="4"
+							columnClasses="ui-g-12 ui-md-3 ui-lg-2,
+										   ui-g-12 ui-md-9 ui-lg-4,
+										   ui-g-12 ui-md-3 ui-lg-2,
+										   ui-g-12 ui-md-9 ui-lg-4"
+							layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+
+							<p:outputLabel for="txtIdentificación"
+								value="#{vista.lblIdentificacionAlumno}" />
+							<p:inputText id="txtIdentificación" maxlength="11"
+								placeholder="#{vista.plcHldrIdentificacionAlumno}"
+								value="#{controladorAlumno.busquedaAlumno.identificacionAlumno}">
+								<p:keyFilter mask="pint" />
+							</p:inputText>
+
+							<p:outputLabel for="txtNombres" value="#{vista.lblNombresAlumno}" />
+							<p:inputText id="txtNombres" maxlength="80"
+								placeholder="#{vista.plcHldrNombresAlumno}"
+								value="#{controladorAlumno.busquedaAlumno.nombreAlumno}" />
+
+							<p:outputLabel for="txtApellidos"
+								value="#{vista.lblApellidosAlumno}" />
+							<p:inputText id="txtApellidos" maxlength="80"
+								placeholder="#{vista.plcHldrApellidosAlumno}"
+								value="#{controladorAlumno.busquedaAlumno.apellidoAlumno}" />
+
+						</p:panelGrid>
+					</p:fieldset>
+
+					<p:panelGrid columns="1" columnClasses="ui-g-12 textCenter"
+						layout="grid" styleClass="ui-panelgrid-blank">
+						<p:column>
+							<p:commandButton value="#{vista.cmmdBtnBuscar}"
+								update=":growl :frmLstAlumno" icon="fa fa-search"
+								actionListener="#{controladorAlumno.cmmdBtnBuscarAlumno}" />
+							<p:commandButton value="#{vista.cmmdBtnCancelar}"
+								immediate="true" update="fstBusquedaAlumno"
+								actionListener="#{controladorAlumno.evtPrepararInstaciaBusquedaAlumno}"
+								styleClass="red-button" icon="fa fa-times" resetValues="true" />
+						</p:column>
+					</p:panelGrid>
+
+					<p:dataTable id="alumnoTable" var="alumno" reflow="true"
+						value="#{controladorAlumno.lstAlumno}" paginator="true"
+						paginatorPosition="bottom" rowIndexVar="rowIndex"
+						currentPageReportTemplate="Showing {startRecord}-{endRecord} out of {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+						<f:facet name="header">
+							<p:commandButton value="#{vista.cmmdBtnNuevo}" icon="fa fa-plus"
+								update=":dlgGuardarAlumno" resetValues="true"
+								actionListener="#{controladorAlumno.cmmdBtnPrepararCreacionAlumno}"
+								oncomplete="PF('wdlgGuardarAlumno').show();" />
+						</f:facet>
+
+						<p:column headerText="N°" width="50">
+               				#{rowIndex+1}
+           				</p:column>
+
+						<p:column headerText="#{vista.lblIdentificacionAlumno}" width="80">
+							<h:outputText value="#{alumno.identificacionAlumno}" />
+						</p:column>
+
+						<p:column headerText="#{vista.lblNombresAlumno}" width="200">
+							<h:outputText value="#{alumno.nombreCompletoAlumno}" />
+						</p:column>
+
+						<p:column headerText="#{vista.lblDireccionAlumno}" width="200">
+							<h:outputText value="#{alumno.direccionAlumno}" />
+						</p:column>
+
+						<p:column headerText="#{vista.lblCelularAlumno}" width="80">
+							<h:outputText value="#{alumno.celularAlumno}" />
+						</p:column>
+
+						<p:column headerText="#{vista.lblUniversidadAlumno}" width="200">
+							<h:outputText value="#{alumno.universidadAlumno}" />
+						</p:column>
+
+						<p:column width="100">
+							<p:commandButton id="cmmdBtnEditar" icon="fa fa-pencil"
+								actionListener="#{controladorAlumno.cmmdBtnPrepararEdicionAlumno(alumno)}"
+								update=":dlgGuardarAlumno" resetValues="true"
+								oncomplete="PF('wdlgGuardarAlumno').show();" />
+							<p:commandButton id="cmmdBtnEliminar" styleClass="red-button"
+								icon="fa fa-trash"
+								action="#{controladorAlumno.cmmdBtnEliminarAlumno(ae)}"
+								actionListener="#{controladorAlumno.cmmdBtnPrepararEliminarAlumno(alumno)}"
+								update="frmLstAlumno">
+								<p:confirm header="#{vista.ConfirmacionHeader}"
+									message="#{vista.confirmacionMensaje}" icon="fa fa-warning" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+					<script type="text/javascript">
+						$(function() {
+							var windowH = $(window).height();
+							windowH -= 350;
+							$('.ui-datatable-tablewrapper').css({
+								'height' : windowH + 'px'
+							});
+							$(window).resize(function() {
+								var windowH = $(window).height();
+								windowH -= 350;
+								$('.ui-datatable-tablewrapper').css({
+									'height' : windowH + 'px'
+								});
+							});
+						});
+					</script>
+					<style type="text/css">
+.ui-datatable .ui-datatable-header {
+	text-align: right !important;
+}
+</style>
+				</h:form>
+
+
+			</div>
+		</div>
+	</div>
+
+</ui:composition>

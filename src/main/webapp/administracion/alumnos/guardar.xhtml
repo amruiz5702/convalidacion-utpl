@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<p:dialog
+		header="#{controladorAlumno.editando eq true ?  vista.ttloEditarAlumno : vista.ttloNuevoAlumno}"
+		id="dlgGuardarAlumno" appendTo="@(body)"
+		styleClass="col-xs-12 col-sm-10 col-md-8 col-lg-6"
+		widgetVar="wdlgGuardarAlumno" minHeight="40" modal="true"
+		fitViewport="true" responsive="true">
+		<h:form id="frmGuardarAlumno">
+			<p:fieldset legend="Datos Personales">
+				<p:panelGrid columns="2"
+					columnClasses="ui-g-12 ui-md-3 ui-lg-2,
+										   ui-g-12 ui-md-9 ui-lg-10"
+					layout="grid" styleClass="ui-panelgrid-blank">
+
+					<p:outputLabel for="txtIdentificación"
+						value="#{vista.lblIdentificacionAlumno}" />
+					<p:inputText id="txtIdentificación" maxlength="10"
+						placeholder="#{vista.plcHldrIdentificacionAlumno}"
+						value="#{controladorAlumno.instanciaEntidad.identificacionAlumno}"
+						required="true">
+						<p:keyFilter mask="pint" />
+					</p:inputText>
+				</p:panelGrid>
+
+				<p:panelGrid columns="2"
+					columnClasses="ui-g-12 ui-md-3 ui-lg-2,
+										   ui-g-12 ui-md-9 ui-lg-10"
+					layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+
+					<p:outputLabel for="txtNombres" value="#{vista.lblNombresAlumno}" />
+					<p:inputText id="txtNombres" maxlength="80"
+						placeholder="#{vista.plcHldrNombresAlumno}"
+						value="#{controladorAlumno.instanciaEntidad.nombreAlumno}"
+						required="true" />
+
+					<p:outputLabel for="txtApellidos"
+						value="#{vista.lblApellidosAlumno}" />
+					<p:inputText id="txtApellidos" maxlength="80"
+						placeholder="#{vista.plcHldrApellidosAlumno}"
+						value="#{controladorAlumno.instanciaEntidad.apellidoAlumno}"
+						required="true" />
+
+				</p:panelGrid>
+
+			</p:fieldset>
+			<br />
+			<p:fieldset legend="Datos Ubicación">
+				<p:panelGrid columns="2"
+					columnClasses="ui-g-12 ui-md-3 ui-lg-2,
+										   ui-g-12 ui-md-9 ui-lg-10"
+					layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+
+					<p:outputLabel for="txtCelular" value="#{vista.lblCelularAlumno}" />
+					<p:inputText id="txtCelular" maxlength="10"
+						placeholder="#{vista.plcHldrCelularAlumno}"
+						value="#{controladorAlumno.instanciaEntidad.celularAlumno}"
+						required="true">
+						<p:keyFilter mask="pint" />
+					</p:inputText>
+
+					<p:outputLabel for="txtDireccion"
+						value="#{vista.lblDireccionAlumno}" />
+					<p:inputText id="txtDireccion"
+						placeholder="#{vista.plcHldrDireccionAlumno}"
+						value="#{controladorAlumno.instanciaEntidad.direccionAlumno}"
+						required="true" />
+				</p:panelGrid>
+			</p:fieldset>
+			<br />
+			<p:fieldset legend="Datos Academicos">
+				<p:panelGrid columns="2"
+					columnClasses="ui-g-12 ui-md-3 ui-lg-2,
+										   ui-g-12 ui-md-9 ui-lg-10"
+					layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+
+					<p:outputLabel for="txtUniversidad"
+						value="#{vista.lblUniversidadAlumno}" />
+					<p:inputText id="txtUniversidad"
+						placeholder="#{vista.plcHldrUniversidadAlumno}"
+						value="#{controladorAlumno.instanciaEntidad.universidadAlumno}"
+						required="true" />
+
+				</p:panelGrid>
+			</p:fieldset>
+		</h:form>
+
+		<f:facet name="footer">
+			<p:commandButton value="#{vista.cmmdBtnAceptar}" icon="fa fa-save"
+				actionListener="#{controladorAlumno.cmmdBtnGuardarAlumno}"
+				update=":frmGuardarAlumno :frmLstAlumno" process=":frmGuardarAlumno @this" partialSubmit="true"
+				oncomplete="handleSubmit(xhr,status,args,PF('wdlgGuardarAlumno'));" />
+			<p:commandButton value="#{vista.cmmdBtnCancelar}" icon="fa fa-times"
+				styleClass="red-button" type="button"
+				onclick="PF('wdlgGuardarAlumno').hide()" resetValues="true" />
+		</f:facet>
+	</p:dialog>
+
+
+</ui:composition>
