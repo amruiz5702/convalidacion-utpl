@@ -16,7 +16,7 @@
 	<title>Sistema de Convalidación</title>
 </h:head>
 
-<h:body styleClass="login-body">
+<h:body styleClass="login-body" style=" background-image: '#{resource['skin:images/background.jpg']}';">
 	<f:metadata>
 		<f:event listener="#{controladorAutenticacion.evtPreRender}"
 			type="preRenderView" />
@@ -65,10 +65,9 @@
 		</div>
 
 	</div>
-	<h:outputStylesheet name="css/fonts.css" library="skin" />
+	<h:outputStylesheet name="css/extra.css" library="skin" />
 	<h:outputStylesheet name="css/layout.css" library="skin" />
-	<h:outputStylesheet name="css/nova-colored-plus.css"
-		library="nova-colored-plus" />
+	<h:outputStylesheet name="css/nova-colored-plus.css" library="nova-colored-plus" />
 
 
 </h:body>

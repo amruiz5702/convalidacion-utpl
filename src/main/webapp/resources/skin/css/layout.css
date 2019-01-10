@@ -1,3 +1,74 @@
+/* Exception */
+.exception-body {
+  height: 100%;
+  font-family: "latoregular", "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  background-image: url("#{resource['skin:images/background.jpg']}");
+}
+
+.exception-wrapper {
+  margin: 0 auto;
+  width: 500px;
+  height: 100%;
+  background-color: #e82424;
+  opacity: 0.7;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+.exception-wrapper.error {
+  background-color: #e82424;
+}
+.exception-wrapper.error a:hover, .exception-wrapper.error a.ui-link:hover, .exception-wrapper.error a.ui-commandlink:hover {
+  background-color: #ffffff;
+  color: #e82424;
+}
+.exception-wrapper.notfound {
+  background-color: #66719c;
+}
+.exception-wrapper.notfound a:hover, .exception-wrapper.notfound a.ui-link:hover, .exception-wrapper.notfound a.ui-commandlink:hover {
+  background-color: #ffffff;
+  color: #66719c;
+}
+.exception-wrapper.access {
+  background-color: #e88524;
+}
+.exception-wrapper.access a:hover, .exception-wrapper.access a.ui-link:hover, .exception-wrapper.access a.ui-commandlink:hover {
+  background-color: #ffffff;
+  color: #e88524;
+}
+.exception-wrapper .message-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.exception-wrapper a, .exception-wrapper a.ui-link, .exception-wrapper a.ui-commandlink {
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  margin: 120px 0 100px 0;
+  padding: 10px;
+  font-size: 16px;
+  -moz-transition: color 0.15s;
+  -o-transition: color 0.15s;
+  -webkit-transition: color 0.15s;
+  transition: color 0.15s;
+}
+.exception-wrapper .footer {
+  color: #ffffff;
+  font-size: 12px;
+  margin-top: 50px;
+}
+
+@media (max-width: 40em) {
+  .exception-wrapper {
+    width: 100%;
+  }
+}
 * {
   margin: 0;
   padding: 0;
@@ -234,7 +305,7 @@ h1, h2, h3, h4 {
   font-size: 16px;
   margin: 0;
   padding: 100px 0 0 0;
-  background-image: url("https://www.utpl.edu.ec/sites/default/files/background-estadisticas_1.jpg");
+  background-image: url("#{resource['skin:images/background.jpg']}");
 }
 .login-body #login-wrapper {
   width: 400px;
@@ -277,20 +348,6 @@ h1, h2, h3, h4 {
 }
 .login-body #login-wrapper #login-container input, .login-body #login-wrapper #login-container button {
   font-size: 16px;
-}
-
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2,
-.col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
-.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5,
-.col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
-.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8,
-.col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
-.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11,
-.col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-  /*position: relative;
-  min-height: 1px;
-   padding-right: 15px;
-  padding-left: 15px; */
 }
 
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6,

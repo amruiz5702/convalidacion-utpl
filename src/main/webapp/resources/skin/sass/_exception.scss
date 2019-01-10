@@ -1,0 +1,77 @@
+/* Exception */
+.exception-body {
+    height: 100%;
+    font-family: "latoregular", "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    font-size: 16px; 
+    margin: 0;
+    background-image: url("\#{resource['skin:images/background.jpg']}") ;   
+}
+
+.exception-wrapper {
+    margin: 0 auto;
+    width: 500px;
+    height: 100%;
+    background-color: #e82424;
+	opacity: 0.7;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    color: #ffffff;
+    box-sizing: border-box;
+    
+    &.error {
+        background-color: #e82424;
+        
+        a:hover, a.ui-link:hover, a.ui-commandlink:hover {
+            background-color: #ffffff;
+            color: #e82424;
+        }
+    }
+    
+    &.notfound {
+        background-color: #66719c;
+        
+        a:hover, a.ui-link:hover, a.ui-commandlink:hover {
+            background-color: #ffffff;
+            color: #66719c;
+        }
+    }
+    
+    &.access {
+        background-color: #e88524;
+        
+        a:hover, a.ui-link:hover, a.ui-commandlink:hover {
+            background-color: #ffffff;
+            color: #e88524;
+        }
+    }
+    
+    .message-title {
+        font-size: 24px;
+        font-weight: bold;    
+    }
+    
+    a, a.ui-link, a.ui-commandlink {
+        display: inline-block;;
+        text-decoration: none;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        margin: 120px 0 100px 0;
+        padding: 10px;
+        font-size: 16px;
+        @include transition(color .15s);
+    }
+    
+    .footer {
+        color: #ffffff;
+        font-size: $fontSizeDefault;
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 40em) {    
+    .exception-wrapper {
+        width: 100%;
+    }
+}
