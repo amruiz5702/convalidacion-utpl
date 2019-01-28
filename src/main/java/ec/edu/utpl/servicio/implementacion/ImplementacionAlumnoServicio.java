@@ -19,7 +19,7 @@ import ec.edu.utpl.servicio.interfase.InterfaceAlumnoServicio;
 public class ImplementacionAlumnoServicio implements InterfaceAlumnoServicio<EntidadAlumno> {
 
 	@Autowired
-	InterfaceAlumnoDao<EntidadAlumno> interfaceAlumnoDao;
+	private InterfaceAlumnoDao<EntidadAlumno> interfaceAlumnoDao;
 
 	@Override
 	public void crear(EntidadAlumno entidad) {
@@ -78,12 +78,14 @@ public class ImplementacionAlumnoServicio implements InterfaceAlumnoServicio<Ent
 	}
 
 	@Override
-	public List<EntidadAlumno> buscarPorPropiedades(EntidadAlumno instanciaAlumno) {
+	public List<EntidadAlumno> buscarPorPropiedades(String identificacionAlumno, String nombreAlumno,
+			String apellidoAlumno) {
 		List<EntidadAlumno> lstAlumno;
-		Map<String, Object> mpPropiedadBusqueda = obtenerPropiedadesBusqueda(instanciaAlumno);
+		HashMap<String, Object> mpPropiedadBusqueda = obtenerPropiedadesBusqueda(identificacionAlumno, nombreAlumno,
+				apellidoAlumno);
 		if (!mpPropiedadBusqueda.isEmpty()) {
 			mpPropiedadBusqueda.put("estadoEntidad", Boolean.TRUE);
-			lstAlumno = interfaceAlumnoDao.buscarPorPropiedades(mpPropiedadBusqueda);
+			lstAlumno = interfaceAlumnoDao.obtener(mpPropiedadBusqueda);
 		} else {
 			throw new NegocioExcepcion("sinParametroBusqueda");
 		}
@@ -100,18 +102,32 @@ public class ImplementacionAlumnoServicio implements InterfaceAlumnoServicio<Ent
 				: Boolean.TRUE;
 	}
 
-	private Map<String, Object> obtenerPropiedadesBusqueda(EntidadAlumno instanciaAlumno) {
-		Map<String, Object> mpPropiedadBusqueda = new HashMap<String, Object>();
-		if (StringUtils.isNoneBlank(instanciaAlumno.getIdentificacionAlumno())) {
-			mpPropiedadBusqueda.put("identificacionAlumno", instanciaAlumno.getIdentificacionAlumno());
+	private HashMap<String, Object> obtenerPropiedadesBusqueda(String identificacionAlumno, String nombreAlumno,
+			String apellidoAlumno) {
+		HashMap<String, Object> mpPropiedadBusqueda = new HashMap<String, Object>();
+		if (StringUtils.isNoneBlank(identificacionAlumno)) {
+			mpPropiedadBusqueda.put("identificacionAlumno", identificacionAlumno);
 		}
-		if (StringUtils.isNoneBlank(instanciaAlumno.getNombreAlumno())) {
-			mpPropiedadBusqueda.put("nombreAlumno", instanciaAlumno.getNombreAlumno());
+		if (StringUtils.isNoneBlank(nombreAlumno)) {
+			mpPropiedadBusqueda.put("nombreAlumno", nombreAlumno);
 		}
-		if (StringUtils.isNoneBlank(instanciaAlumno.getApellidoAlumno())) {
-			mpPropiedadBusqueda.put("apellidoAlumno", instanciaAlumno.getApellidoAlumno());
+		if (StringUtils.isNoneBlank(apellidoAlumno)) {
+			mpPropiedadBusqueda.put("apellidoAlumno", apellidoAlumno);
 		}
 		return mpPropiedadBusqueda;
+	}
+
+	@Override
+	public EntidadAlumno buscarPorCedula(String identificacionAlumno)
+			throws InstantiationException, IllegalAccessException {
+		EntidadAlumno entidadAlumno = this.generarNuevaInstancia();
+		Map<String, Object> mpPropiedadBusqueda = new HashMap<String, Object>();
+		if (StringUtils.isNoneBlank(identificacionAlumno)) {
+			mpPropiedadBusqueda.put("identificacionAlumno", identificacionAlumno);
+			mpPropiedadBusqueda.put("estadoEntidad", Boolean.TRUE);
+			entidadAlumno = interfaceAlumnoDao.obtener(mpPropiedadBusqueda);
+		}
+		return entidadAlumno;
 	}
 
 }

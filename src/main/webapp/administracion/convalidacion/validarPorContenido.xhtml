@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<p:dialog header="Validar por contenido" id="dlgConvalidaContenido"
+		appendTo="@(body)" styleClass="col-xs-12 col-sm-10 col-md-8 col-lg-5"
+		widgetVar="wdlgConvalidaContenido" minHeight="40" modal="true"
+		fitViewport="true" responsive="true">
+		<h:form id="frmConvalidaContenido">
+			<p:panelGrid columns="1"
+				columnClasses="ui-g-12 ui-md-3 ui-lg-12,
+										   ui-g-12 ui-md-9 ui-lg-12"
+				layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+
+				<p:outputLabel for="cbxComponenteUtpl"
+					value="#{vista.lblComponenteUtplConvalidacion}" />
+				<p:selectOneMenu id="cbxComponenteUtpl"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{controladorConvalidacion.entidadComponente}">
+					<f:selectItems value="#{controladorConvalidacion.lstComponente}"
+						var="componente" itemLabel="#{componente.nombreComponente}"
+						itemValue="#{componente}" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+		</h:form>
+
+		<f:facet name="footer">
+			<p:commandButton value="#{vista.cmmdBtnAceptar}" icon="fa fa-save"
+				actionListener="#{controladorConvalidacion.cmmdBtnRevisarConvalidacionContenido}"
+				update=":frmConvalidaContenido :frmGuardarConvalidacion:detalleConvalidacionTable"
+				process=":frmConvalidaContenido @this" partialSubmit="true"
+				oncomplete="handleSubmit(xhr,status,args,PF('wdlgConvalidaContenido'));" />
+			<p:commandButton value="#{vista.cmmdBtnCancelar}" icon="fa fa-times"
+				styleClass="red-button" type="button"
+				onclick="PF('wdlgConvalidaContenido').hide()" resetValues="true" />
+		</f:facet>
+	</p:dialog>
+
+</ui:composition>

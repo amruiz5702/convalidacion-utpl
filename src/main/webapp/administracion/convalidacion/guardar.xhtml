@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="./../../WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:hm="http://xmlns.jcp.org/jsf/composite/componente"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewAction
+				action="#{controladorConvalidacion.evtPrepararInstaciaConvalidacion}" />
+			<f:viewAction
+				action="#{controladorConvalidacion.evtObtenerComponentes}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card" style="height: 100%;">
+
+					<h1>
+						<p:outputLabel value="#{vista.ttloNuevaConvalidacion}"
+							styleClass="fontSize24" />
+					</h1>
+
+					<h:form id="frmGuardarConvalidacion">
+						<div class="ui-g-12 ui-md-6 ui-lg-3">
+							<p:panel id="pnlBusquedaEstudiante" header="Busqueda Estudiante"
+								style="height:100%">
+
+								<p:panelGrid layout="grid" columns="1"
+									styleClass="ui-panelgrid-blank ui-fluid">
+
+									<p:outputLabel for="txtIdentificación" styleClass="textBold"
+										value="#{vista.lblIdentificacionAlumno}" />
+
+									<p:column>
+										<p:inputText id="txtIdentificación" maxlength="10"
+											style="width: 90%"
+											placeholder="#{vista.plcHldrIdentificacionAlumno}"
+											value="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.identificacionAlumno}"
+											required="true">
+											<p:keyFilter mask="alphanum" />
+										</p:inputText>
+										<p:spacer width="3" />
+										<p:commandButton icon="fa fa-search"
+											process="pnlBusquedaEstudiante @this"
+											update="pnlBusquedaEstudiante outPnlCargarMateria"
+											actionListener="#{controladorConvalidacion.cmmdBtnBuscarAlumnoPorCedula}" />
+									</p:column>
+
+									<p:outputLabel for="txtNombresAlumno" styleClass="textBold"
+										value="#{vista.lblNombresAlumno}" />
+
+									<p:inputText id="txtNombresAlumno"
+										placeholder="#{vista.plcHldrNombresAlumno}"
+										value="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.nombreCompletoAlumno}"
+										readonly="true" />
+
+									<p:outputLabel for="txtUniversidad" styleClass="textBold"
+										value="#{vista.lblUniversidadAlumno}" />
+
+									<p:inputText id="txtUniversidad"
+										placeholder="#{vista.plcHldrUniversidadAlumno}"
+										value="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.universidadAlumno}"
+										readonly="true" />
+
+								</p:panelGrid>
+
+
+							</p:panel>
+						</div>
+
+						<div class="ui-g-12 ui-md-6 ui-lg-5">
+							<p:panel header="Archivo Materias Aprobadas" style="height:100%">
+								<p:outputPanel id="outPnlCargarMateria">
+									<p:panelGrid columns="1"
+										columnClasses="ui-g-12 ui-md-12 ui-lg-12" layout="grid"
+										styleClass="ui-panelgrid-blank ui-fluid"
+										rendered="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.idAlumno eq null ? false : true}">
+
+										<p:outputLabel id="lblNombreArchivoExcel"
+											value="#{controladorConvalidacion.upldMateriaAprobada.getFileName()}"
+											styleClass="textBold fontSize14" />
+										<p:fileUpload widgetVar="wflUldMateriasAprobadas"
+											id="flUldMateriasAprobadas"
+											fileUploadListener="#{controladorConvalidacion.evtSubirArchivo}"
+											update="@this outPnlCargarMateria outPnlMedidaSimilitud"
+											mode="advanced" auto="true"
+											oncomplete="PF('wsldrPorcentajeUmbral').setValue(50);"
+											dragDropSupport="false" sizeLimit="500000" fileLimit="1"
+											allowTypes="/(\.|\/)(xls?x)$/" />
+
+									</p:panelGrid>
+
+									<p:panelGrid columns="1"
+										styleClass="ui-panelgrid-blank ui-fluid"
+										rendered="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.idAlumno eq null ? false : true}">
+
+										<p:commandButton id="btnVerMateriasAprobadas"
+											disabled="#{controladorConvalidacion.upldMateriaAprobada eq null}"
+											value="#{vista.cmmdBtnVer}" icon="fa fa-align-justify"
+											type="button" />
+
+										<ui:include
+											src="/administracion/convalidacion/verMateriaAprobada.xhtml" />
+									</p:panelGrid>
+								</p:outputPanel>
+
+							</p:panel>
+						</div>
+
+						<div class="ui-g-12 ui-md-6 ui-lg-4">
+							<p:panel header="Seleccione Medida Similitud" style="height:100%">
+								<p:outputPanel id="outPnlMedidaSimilitud">
+
+									<p:panelGrid columns="1"
+										columnClasses="ui-g-12 ui-md-12 ui-lg-12" layout="grid"
+										styleClass="ui-panelgrid-blank ui-fluid"
+										rendered="#{controladorConvalidacion.upldMateriaAprobada eq null ? false : true}">
+										<p:outputLabel for="rbtnSimilitud"
+											value="#{vista.lblMedidaSimilitud}"
+											styleClass="textBold fontSize15" />
+										<p:selectOneRadio id="rbtnSimilitud"
+											value="#{controladorConvalidacion.instanciaEntidad.medidaSimilitudConvalidacion}"
+											layout="responsive" columns="3" required="true">
+											<f:selectItem itemLabel="JACCARD" itemValue="JACCARD" />
+											<f:selectItem itemLabel="MINHASH" itemValue="MINHASH" />
+											<f:selectItem itemLabel="LSH" itemValue="LSH" />
+										</p:selectOneRadio>
+									</p:panelGrid>
+
+									<p:panelGrid columns="1"
+										columnClasses="ui-g-12 ui-md-12 ui-lg-12" layout="grid"
+										styleClass="ui-panelgrid-blank ui-fluid"
+										rendered="#{controladorConvalidacion.upldMateriaAprobada eq null ? false : true}">
+
+										<p:outputLabel for="sldrPorcentajeUmbral"
+											value="#{vista.lblUmbralReferencia}"
+											styleClass="textBold fontSize15" />
+
+										<h:inputHidden id="txtPorcentajeUmbral"
+											value="#{controladorConvalidacion.instanciaEntidad.porcentajeUmbralConvalidacion}" />
+										<h:outputText id="output"
+											value="#{vista.lblUmbralReferencia} de %#{controladorConvalidacion.instanciaEntidad.porcentajeUmbralConvalidacion}" />
+										<p:slider id="sldrPorcentajeUmbral"
+											widgetVar="wsldrPorcentajeUmbral" for="txtPorcentajeUmbral"
+											display="output" maxValue="100"
+											displayTemplate="Porcentaje de %{value}">
+											<p:ajax event="slideEnd"
+												listener="#{controladorConvalidacion.cmmdBtnRevisarConvalidacion(sl)}"
+												update=":frmGuardarConvalidacion:detalleConvalidacionTable pnlButtonConvalidacion"
+												process="@form" />
+										</p:slider>
+
+									</p:panelGrid>
+
+									<p:panelGrid columns="1"
+										styleClass="ui-panelgrid-blank ui-fluid"
+										rendered="#{controladorConvalidacion.upldMateriaAprobada eq null ? false : true}">
+
+										<p:commandButton value="#{vista.cmmdBtnRevisar}"
+											icon="fa fa-fw fa-gear"
+											update=":frmGuardarConvalidacion:detalleConvalidacionTable pnlButtonConvalidacion"
+											actionListener="#{controladorConvalidacion.cmmdBtnRevisarConvalidacion}" />
+
+									</p:panelGrid>
+
+								</p:outputPanel>
+							</p:panel>
+						</div>
+
+
+						<div class="ui-g-12 ui-md-12 ui-lg-12">
+							<p:dataTable id="detalleConvalidacionTable" var="detalle"
+								reflow="true" widgetVar="wdetalleConvalidacionTable"
+								value="#{controladorConvalidacion.instanciaEntidad.lstDetalleConvalidacion}"
+								paginator="true" paginatorPosition="bottom" rows="10"
+								rowIndexVar="rowIndex"
+								currentPageReportTemplate="Showing {startRecord}-{endRecord} out of {totalRecords}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+								<p:column headerText="N°" width="50">
+               						#{rowIndex+1}
+           						</p:column>
+
+								<p:column headerText="#{vista.lblMateriaAprobadaConvalidacion}"
+									sortBy="#{detalle.materiaAprobada}" width="200">
+									<h:outputText value="#{detalle.materiaAprobada}" />
+								</p:column>
+
+								<p:column headerText="#{vista.lblComponenteUtplConvalidacion}"
+									width="200">
+									<h:outputText
+										value="#{detalle.componente eq null ? 'No supera umbral %'.concat( controladorConvalidacion.instanciaEntidad.porcentajeUmbralConvalidacion) : detalle.componente.nombreComponente }" />
+									<br />
+									<p:commandLink
+										actionListener="#{controladorConvalidacion.cmmdBtnPrepararConvalidacionContenido(detalle)}"
+										oncomplete="PF('wdlgConvalidaContenido').show();"
+										rendered="#{detalle.componente eq null}"
+										title="Validar con contenido">
+										<i class="fa fa-search fontSize14" />
+									</p:commandLink>
+								</p:column>
+
+								<p:column headerText="#{vista.lblUmbralConvalidacion}"
+									sortBy="#{detalle.umbralDetalleConvalidacion}" width="80">
+									<h:outputText value="#{detalle.umbralDetalleConvalidacion}" />
+								</p:column>
+
+								<p:column headerText="#{vista.lblDescripcionConvalidacion}"
+									width="200">
+									<h:outputText
+										value="#{detalle.descripcionDetalleConvalidacion}" />
+								</p:column>
+
+							</p:dataTable>
+						</div>
+						<div class="ui-g-12 ui-md-12 ui-lg-12"
+							jsf:id="pnlButtonConvalidacion">
+
+							<p:commandButton value="#{vista.cmmdBtnAceptar}"
+								icon="fa fa-save" resetValues="true"
+								disabled="#{controladorConvalidacion.instanciaEntidad.lstDetalleConvalidacion eq null || controladorConvalidacion.instanciaEntidad.lstDetalleConvalidacion.size() le 0 }" />
+
+							<p:commandButton value="#{vista.cmmdBtnImprimir}"
+								icon="fa fa-print" styleClass="green-button"
+								disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion eq null}" />
+
+							<p:commandButton value="#{vista.cmmdBtnCancelar}"
+								icon="fa fa-times" resetValues="true" immediate="true"
+								actionListener="#{controladorConvalidacion.evtPrepararInstaciaConvalidacion}"
+								update="@form" styleClass="red-button" />
+						</div>
+					</h:form>
+					<ui:include
+						src="/administracion/convalidacion/validarPorContenido.xhtml" />
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

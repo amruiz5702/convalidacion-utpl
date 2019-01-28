@@ -25,7 +25,7 @@
 						placeholder="#{vista.plcHldrIdentificacionAlumno}"
 						value="#{controladorAlumno.instanciaEntidad.identificacionAlumno}"
 						required="true">
-						<p:keyFilter mask="pint" />
+						<p:keyFilter mask="alphanum" />
 					</p:inputText>
 				</p:panelGrid>
 
@@ -38,14 +38,18 @@
 					<p:inputText id="txtNombres" maxlength="80"
 						placeholder="#{vista.plcHldrNombresAlumno}"
 						value="#{controladorAlumno.instanciaEntidad.nombreAlumno}"
-						required="true" />
+						required="true">
+						<p:keyFilter mask="alpha" />
+					</p:inputText>
 
 					<p:outputLabel for="txtApellidos"
 						value="#{vista.lblApellidosAlumno}" />
 					<p:inputText id="txtApellidos" maxlength="80"
 						placeholder="#{vista.plcHldrApellidosAlumno}"
 						value="#{controladorAlumno.instanciaEntidad.apellidoAlumno}"
-						required="true" />
+						required="true">
+						<p:keyFilter mask="alpha" />
+					</p:inputText>
 
 				</p:panelGrid>
 
@@ -94,7 +98,8 @@
 		<f:facet name="footer">
 			<p:commandButton value="#{vista.cmmdBtnAceptar}" icon="fa fa-save"
 				actionListener="#{controladorAlumno.cmmdBtnGuardarAlumno}"
-				update=":frmGuardarAlumno :frmLstAlumno" process=":frmGuardarAlumno @this" partialSubmit="true"
+				update=":frmGuardarAlumno :frmLstAlumno"
+				process=":frmGuardarAlumno @this" partialSubmit="true"
 				oncomplete="handleSubmit(xhr,status,args,PF('wdlgGuardarAlumno'));" />
 			<p:commandButton value="#{vista.cmmdBtnCancelar}" icon="fa fa-times"
 				styleClass="red-button" type="button"

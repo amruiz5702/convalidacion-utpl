@@ -13,7 +13,7 @@
 		<jsf-version>2.3</jsf-version>
 		<servlet-version>4.0.0</servlet-version>
 		<cdi-version>2.0</cdi-version>
-		<primefaces-version>6.2.12</primefaces-version>
+		<primefaces-version>7.0</primefaces-version>
 		<primefacese-version>6.2</primefacese-version>
 		<springs-version>5.0.2.RELEASE</springs-version>
 		<springf-version>5.0.4.RELEASE</springf-version>
@@ -24,6 +24,7 @@
 		<log4j-jackson-version>2.9.4</log4j-jackson-version>
 		<omnifaces-version>1.5</omnifaces-version>
 		<jmail-version>1.4.7</jmail-version>
+		<poi-excel>4.0.1</poi-excel>
 	</properties>
 	<dependencies>
 		<!-- JSF API -->
@@ -199,6 +200,22 @@
 					<artifactId>cdi-api</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi-excel}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi-excel}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.edduarte</groupId>
+			<artifactId>similarity-search-java</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 
 	</dependencies>
