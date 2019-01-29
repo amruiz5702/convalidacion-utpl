@@ -13,8 +13,11 @@ public interface InterfaceConvalidacionServicio<T> extends InterfaceServicio<T> 
 
 	public List<EntidadDetalleConvalidacion> validarSimilitudMaterias(String nombreAlgoritmo, Integer umbral,
 			List<String[]> lstMateriaAprobadas, List<EntidadComponente> lstComponente);
-	
+
 	public EntidadDetalleConvalidacion validarSimilitudMateriaContenido(String nombreAlgoritmo,
 			Integer umbralReferencia, EntidadDetalleConvalidacion entidadDetalleConvalidacion,
 			EntidadComponente entidadComponente);
+
+	public String guardarArchivoEnServidor(InputStream in, String fileName)
+			throws IOException;
 }

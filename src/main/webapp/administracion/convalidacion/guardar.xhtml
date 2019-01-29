@@ -87,7 +87,7 @@
 										rendered="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.idAlumno eq null ? false : true}">
 
 										<p:outputLabel id="lblNombreArchivoExcel"
-											value="#{controladorConvalidacion.upldMateriaAprobada.getFileName()}"
+											value="#{controladorConvalidacion.nombreDocumentoExcel}"
 											styleClass="textBold fontSize14" />
 										<p:fileUpload widgetVar="wflUldMateriasAprobadas"
 											id="flUldMateriasAprobadas"
@@ -105,7 +105,7 @@
 										rendered="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.idAlumno eq null ? false : true}">
 
 										<p:commandButton id="btnVerMateriasAprobadas"
-											disabled="#{controladorConvalidacion.upldMateriaAprobada eq null}"
+											disabled="#{controladorConvalidacion.iptStrmDocumentoExcel eq null}"
 											value="#{vista.cmmdBtnVer}" icon="fa fa-align-justify"
 											type="button" />
 
@@ -124,7 +124,7 @@
 									<p:panelGrid columns="1"
 										columnClasses="ui-g-12 ui-md-12 ui-lg-12" layout="grid"
 										styleClass="ui-panelgrid-blank ui-fluid"
-										rendered="#{controladorConvalidacion.upldMateriaAprobada eq null ? false : true}">
+										rendered="#{controladorConvalidacion.iptStrmDocumentoExcel eq null ? false : true}">
 										<p:outputLabel for="rbtnSimilitud"
 											value="#{vista.lblMedidaSimilitud}"
 											styleClass="textBold fontSize15" />
@@ -140,7 +140,7 @@
 									<p:panelGrid columns="1"
 										columnClasses="ui-g-12 ui-md-12 ui-lg-12" layout="grid"
 										styleClass="ui-panelgrid-blank ui-fluid"
-										rendered="#{controladorConvalidacion.upldMateriaAprobada eq null ? false : true}">
+										rendered="#{controladorConvalidacion.iptStrmDocumentoExcel eq null ? false : true}">
 
 										<p:outputLabel for="sldrPorcentajeUmbral"
 											value="#{vista.lblUmbralReferencia}"
@@ -164,7 +164,7 @@
 
 									<p:panelGrid columns="1"
 										styleClass="ui-panelgrid-blank ui-fluid"
-										rendered="#{controladorConvalidacion.upldMateriaAprobada eq null ? false : true}">
+										rendered="#{controladorConvalidacion.iptStrmDocumentoExcel eq null ? false : true}">
 
 										<p:commandButton value="#{vista.cmmdBtnRevisar}"
 											icon="fa fa-fw fa-gear"
@@ -228,7 +228,9 @@
 
 							<p:commandButton value="#{vista.cmmdBtnAceptar}"
 								icon="fa fa-save" resetValues="true"
-								disabled="#{controladorConvalidacion.instanciaEntidad.lstDetalleConvalidacion eq null || controladorConvalidacion.instanciaEntidad.lstDetalleConvalidacion.size() le 0 }" />
+								actionListener="#{controladorConvalidacion.cmmdBtnGuardarConvalidacion}"
+								update="@form"
+								disabled="#{(controladorConvalidacion.instanciaEntidad.lstDetalleConvalidacion eq null || controladorConvalidacion.instanciaEntidad.lstDetalleConvalidacion.size() le 0 ) or controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}" />
 
 							<p:commandButton value="#{vista.cmmdBtnImprimir}"
 								icon="fa fa-print" styleClass="green-button"

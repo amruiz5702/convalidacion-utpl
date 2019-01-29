@@ -34,7 +34,7 @@ public class EntidadDetalleConvalidacion extends Entidad implements Serializable
 	@Column(name = "umbral_detalle_convalidacion", nullable = false, length = 3)
 	private Double umbralDetalleConvalidacion = 0.0;
 
-	@Column(name = "descripcion_detalle_convalidacion", nullable = false, columnDefinition = "text")
+	@Column(name = "descripcion_detalle_convalidacion", nullable = true, columnDefinition = "text")
 	private String descripcionDetalleConvalidacion;
 
 	public Integer getIdDetalleConvalidacion() {

@@ -1,19 +1,20 @@
 package ec.edu.utpl.controlador.beans;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ec.edu.utpl.controlador.seguridad.ControladorDetalleUsuario;
 import ec.edu.utpl.modelo.entidad.EntidadAlumno;
 import ec.edu.utpl.modelo.entidad.EntidadComponente;
 import ec.edu.utpl.modelo.entidad.EntidadConvalidacion;
@@ -35,10 +36,14 @@ public class ControladorConvalidacion extends Controlador<EntidadConvalidacion> 
 	private InterfaceAlumnoServicio<EntidadAlumno> interfaceAlumnoServicio;
 	@Autowired
 	private InterfaceComponenteServicio<EntidadComponente> interfaceComponenteServicio;
+	@Autowired
+	private ControladorDetalleUsuario controladorDetalleUsuario;
 
 	private List<String[]> lstMateriaAprobada;
 
-	private UploadedFile upldMateriaAprobada;
+	private InputStream iptStrmDocumentoExcel;
+
+	private String nombreDocumentoExcel;
 
 	private EntidadDetalleConvalidacion entidadDetalleConvalidacion;
 
@@ -54,12 +59,12 @@ public class ControladorConvalidacion extends Controlador<EntidadConvalidacion> 
 		this.lstMateriaAprobada = lstMateriaAprobada;
 	}
 
-	public UploadedFile getUpldMateriaAprobada() {
-		return upldMateriaAprobada;
+	public InputStream getIptStrmDocumentoExcel() {
+		return iptStrmDocumentoExcel;
 	}
 
-	public void setUpldMateriaAprobada(UploadedFile upldMateriaAprobada) {
-		this.upldMateriaAprobada = upldMateriaAprobada;
+	public void setIptStrmDocumentoExcel(InputStream iptStrmDocumentoExcel) {
+		this.iptStrmDocumentoExcel = iptStrmDocumentoExcel;
 	}
 
 	public EntidadDetalleConvalidacion getEntidadDetalleConvalidacion() {
@@ -84,6 +89,14 @@ public class ControladorConvalidacion extends Controlador<EntidadConvalidacion> 
 
 	public void setEntidadComponente(EntidadComponente entidadComponente) {
 		this.entidadComponente = entidadComponente;
+	}
+
+	public String getNombreDocumentoExcel() {
+		return nombreDocumentoExcel;
+	}
+
+	public void setNombreDocumentoExcel(String nombreDocumentoExcel) {
+		this.nombreDocumentoExcel = nombreDocumentoExcel;
 	}
 
 	public void cmmdBtnBuscarAlumnoPorCedula(ActionEvent ae) throws InstantiationException, IllegalAccessException {
@@ -125,12 +138,38 @@ public class ControladorConvalidacion extends Controlador<EntidadConvalidacion> 
 		this.setEntidadComponente(null);
 	}
 
+	public void cmmdBtnGuardarConvalidacion(ActionEvent ae)
+			throws InstantiationException, IllegalAccessException, IOException {
+
+		String claveMensaje;
+		claveMensaje = "convalidacionCreada";
+
+		Object[] argumentos = new Object[] { this.getInstanciaEntidad().getEntidadAlumno().getNombreCompletoAlumno(),
+				this.getInstanciaEntidad().getEntidadAlumno().getIdentificacionAlumno() };
+
+		this.getInstanciaEntidad().setEntidadDocente(
+				controladorDetalleUsuario.getUsuarioLogeado().getEntidadUsuario().getDocenteUsuario());
+		this.getInstanciaEntidad().setFechaRegistroConvalidacion(new Date());
+
+		this.getInstanciaEntidad().setRutaArchivoExcelConvalidacion(
+				this.interfaceConvalidacionServicio.guardarArchivoEnServidor(this.iptStrmDocumentoExcel,
+						this.getInstanciaEntidad().getEntidadAlumno().getIdentificacionAlumno() + ".xls"));
+
+		interfaceConvalidacionServicio.crear(this.getInstanciaEntidad());
+		UtilitarioMensajeFace.agregarMensaje(claveMensaje, argumentos, FacesMessage.SEVERITY_INFO);
+
+	}
+
 	public void evtSubirArchivo(FileUploadEvent event) throws IOException {
-		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		this.upldMateriaAprobada = event.getFile();
+
+		Object[] argumentos = new Object[] { event.getFile().getFileName() };
+
+		iptStrmDocumentoExcel = event.getFile().getInputstream();
+		nombreDocumentoExcel = event.getFile().getFileName();
 		this.lstMateriaAprobada = interfaceConvalidacionServicio.leerArchivoExcel(event.getFile().getFileName(),
 				event.getFile().getInputstream());
+
+		UtilitarioMensajeFace.agregarMensaje("archivoSubido", argumentos, FacesMessage.SEVERITY_INFO);
 	}
 
 	public void evtPrepararInstaciaConvalidacion() throws InstantiationException, IllegalAccessException {

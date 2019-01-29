@@ -1,18 +1,16 @@
 package ec.edu.utpl.servicio.implementacion;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,10 +18,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.model.SortOrder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edduarte.similarity.Similarity;
 
+import ec.edu.utpl.modelo.dao.interfase.InterfaceConvalidacionDao;
 import ec.edu.utpl.modelo.entidad.EntidadComponente;
 import ec.edu.utpl.modelo.entidad.EntidadContenido;
 import ec.edu.utpl.modelo.entidad.EntidadConvalidacion;
@@ -35,8 +35,12 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 
 	private String PATH_FILE = "C:\\DOCUMENTS";
 
+	@Autowired
+	private InterfaceConvalidacionDao<EntidadConvalidacion> interfaceConvalidacionDao;
+
 	@Override
 	public void crear(EntidadConvalidacion entidad) {
+		interfaceConvalidacionDao.crear(entidad);
 	}
 
 	@Override
@@ -120,6 +124,7 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 		if (workbook != null) {
 			workbook.close();
 		}
+
 		return lstMateriasAprobadas;
 	}
 
@@ -242,15 +247,17 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 		return lstDetalleConvalidacion;
 	}
 
-	public void copyFile(String fileName, InputStream in) throws IOException {
-		Path folder = Paths.get(PATH_FILE);
-		String filename = FilenameUtils.getBaseName(fileName);
-		String extension = FilenameUtils.getExtension(fileName);
-		Path file = Files.createTempFile(folder, filename + "-", "." + extension);
-		try (InputStream input = in) {
-			Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+	public String guardarArchivoEnServidor(InputStream in, String fileName) throws IOException {
+
+		OutputStream out = new FileOutputStream(new File(PATH_FILE + File.separator + fileName));
+		int read = 0;
+		byte[] bytes = new byte[1024];
+		while ((read = in.read(bytes)) != -1) {
+			out.write(bytes, 0, read);
 		}
-		System.out.println("Uploaded file successfully saved in " + file);
+		out.flush();
+		out.close();
+		return PATH_FILE + File.separator + fileName;
 	}
 
 }

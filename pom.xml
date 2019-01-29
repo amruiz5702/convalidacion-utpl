@@ -25,6 +25,7 @@
 		<omnifaces-version>1.5</omnifaces-version>
 		<jmail-version>1.4.7</jmail-version>
 		<poi-excel>4.0.1</poi-excel>
+		<itext.version>7.1.4</itext.version>
 	</properties>
 	<dependencies>
 		<!-- JSF API -->
@@ -216,6 +217,13 @@
 			<groupId>com.edduarte</groupId>
 			<artifactId>similarity-search-java</artifactId>
 			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext7-core</artifactId>
+			<version>${itext.version}</version>
+			<type>pom</type>
 		</dependency>
 
 	</dependencies>
