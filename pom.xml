@@ -14,7 +14,7 @@
 		<servlet-version>4.0.0</servlet-version>
 		<cdi-version>2.0</cdi-version>
 		<primefaces-version>7.0</primefaces-version>
-		<primefacese-version>6.2</primefacese-version>
+		<primefacese-version>6.2.10</primefacese-version>
 		<springs-version>5.0.2.RELEASE</springs-version>
 		<springf-version>5.0.4.RELEASE</springf-version>
 		<springw-version>2.5.0.RC1</springw-version>
@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
 			<artifactId>resources-ckeditor</artifactId>
-			<version>6.2.4</version>
+			<version>${primefacese-version}</version>
 		</dependency>
 		<!-- FONTAWESOME API -->
 		<!--<dependency> <groupId>org.webjars</groupId> <artifactId>font-awesome</artifactId> 
