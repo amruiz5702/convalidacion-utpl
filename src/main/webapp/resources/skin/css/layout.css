@@ -1,3 +1,62 @@
+/** MONTSERRAT**/
+@font-face {
+  font-family: "Montserrat Light";
+  font-weight: 300;
+  font-style: normal;
+  src: url("#{resource['skin:fonts/montserrat/Montserrat-Light.eot']}");
+  src: url("#{resource['skin:fonts/montserrat/Montserrat-Light.eot']}#iefix") format("embedded-opentype"), url("#{resource['skin:fonts/montserrat/Montserrat-Light.woff']}") format("woff"), url("#{resource['skin:fonts/montserrat/Montserrat-Light.woff2']}") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat Regular";
+  font-weight: 400;
+  font-style: normal;
+  src: url("#{resource['skin:fonts/montserrat/Montserrat-Regular.eot']}");
+  src: url("#{resource['skin:fonts/montserrat/Montserrat-Regular.eot']}#iefix") format("embedded-opentype"), url("#{resource['skin:fonts/montserrat/Montserrat-Regular.woff']}") format("woff"), url("#{resource['skin:fonts/montserrat/Montserrat-Regular.woff2']}") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat Bold";
+  font-weight: 700;
+  font-style: normal;
+  src: url("#{resource['skin:fonts/montserrat/Montserrat-Bold.eot']}");
+  src: url("#{resource['skin:fonts/montserrat/Montserrat-Bold.eot']}#iefix") format("embedded-opentype"), url("#{resource['skin:fonts/montserrat/Montserrat-Bold.woff']}") format("woff"), url("#{resource['skin:fonts/montserrat/Montserrat-Bold.woff2']}") format("woff2");
+}
+/** ROBOTO**/
+@font-face {
+  font-family: "Roboto Condensed Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("#{resource['skin:fonts/roboto/RobotoCondensed-Regular.woff']}") format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: url("#{resource['skin:fonts/roboto/RobotoCondensed-Italic.woff']}") format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("#{resource['skin:fonts/roboto/RobotoCondensed-Bold.woff']}") format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed Bold Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: url("#{resource['skin:fonts/roboto/RobotoCondensed-BoldItalic.woff']}") format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed Light";
+  font-style: normal;
+  font-weight: normal;
+  src: url("#{resource['skin:fonts/roboto/RobotoCondensed-Light.woff']}") format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed Light Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: url("#{resource['skin:fonts/roboto/RobotoCondensed-LightItalic.woff']}") format("woff");
+}
 /* Exception */
 .exception-body {
   height: 100%;
@@ -12,7 +71,7 @@
   width: 500px;
   height: 100%;
   background-color: #e82424;
-  opacity: 0.7;
+  opacity: 0.8;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   text-align: center;
   padding-top: 100px;

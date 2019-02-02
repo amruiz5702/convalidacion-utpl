@@ -28,6 +28,13 @@ $redButtonBorder: #9c1627;
 $redButtonHover: #d2524f;
 $redButtonActive: #9c1627;
 
+/* GreenButton */
+$greenButton: #1f9e53;
+$greenButtonBorder: #107533;
+$greenButtonHover: #2eb971;
+$greenButtonActive: #178544;
+
+
 
 @mixin border-radius($val) {
     -moz-border-radius: $val;
