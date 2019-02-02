@@ -28,24 +28,28 @@
 										   ui-g-12 ui-md-9 ui-lg-4"
 							layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
 
-							<p:outputLabel for="txtIdentificación"
+							<p:outputLabel for="txtIdentificacion"
 								value="#{vista.lblIdentificacionAlumno}" />
-							<p:inputText id="txtIdentificación" maxlength="11"
+							<p:inputText id="txtIdentificacion" maxlength="10"
 								placeholder="#{vista.plcHldrIdentificacionAlumno}"
 								value="#{controladorAlumno.busquedaAlumno.identificacionAlumno}">
-								<p:keyFilter mask="pint" />
+								<p:keyFilter mask="alphanum" />
 							</p:inputText>
 
 							<p:outputLabel for="txtNombres" value="#{vista.lblNombresAlumno}" />
 							<p:inputText id="txtNombres" maxlength="80"
 								placeholder="#{vista.plcHldrNombresAlumno}"
-								value="#{controladorAlumno.busquedaAlumno.nombreAlumno}" />
+								value="#{controladorAlumno.busquedaAlumno.nombreAlumno}">
+								<p:keyFilter mask="alpha" />
+							</p:inputText>
 
 							<p:outputLabel for="txtApellidos"
 								value="#{vista.lblApellidosAlumno}" />
 							<p:inputText id="txtApellidos" maxlength="80"
 								placeholder="#{vista.plcHldrApellidosAlumno}"
-								value="#{controladorAlumno.busquedaAlumno.apellidoAlumno}" />
+								value="#{controladorAlumno.busquedaAlumno.apellidoAlumno}">
+								<p:keyFilter mask="alpha" />
+							</p:inputText>
 
 						</p:panelGrid>
 					</p:fieldset>
@@ -65,7 +69,7 @@
 
 					<p:dataTable id="alumnoTable" var="alumno" reflow="true"
 						value="#{controladorAlumno.lstAlumno}" paginator="true"
-						paginatorPosition="bottom" rowIndexVar="rowIndex"
+						paginatorPosition="bottom" rowIndexVar="rowIndex" rows="10"
 						currentPageReportTemplate="Showing {startRecord}-{endRecord} out of {totalRecords}"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
@@ -134,10 +138,10 @@
 						});
 					</script>
 					<style type="text/css">
-.ui-datatable .ui-datatable-header {
-	text-align: right !important;
-}
-</style>
+						.ui-datatable .ui-datatable-header {
+							text-align: right !important;
+						}
+					</style>
 				</h:form>
 
 

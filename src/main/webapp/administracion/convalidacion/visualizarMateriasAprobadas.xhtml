@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hm="http://xmlns.jcp.org/jsf/composite/componente">
+
+	<p:overlayPanel id="ovpnlMateriasAprobadas"
+		for="btnVerMateriasAprobadas" hideEffect="fade" dynamic="true"
+		style="width:800px" modal="true" dismissable="false"
+		showCloseIcon="true">
+
+		<p:dataTable var="materia" id="dtMateriasAprobadas"
+			value="#{controladorConvalidacion.lstMateriaAprobada}" rows="6"
+			paginator="true" paginatorPosition="bottom">
+			<p:column headerText="CÓDIGO" width="100">
+				<h:outputText value="#{materia[0]}" />
+			</p:column>
+
+			<p:column headerText="COMPONENTE ACADÉMICO">
+				<h:outputText value="#{materia[1]}" />
+			</p:column>
+
+			<p:column headerText="CICLO" width="80">
+				<h:outputText value="#{materia[2]}" />
+			</p:column>
+
+			<p:column headerText="Nº CRÉDITOS" width="80">
+				<h:outputText value="#{materia[3]}" />
+			</p:column>
+		</p:dataTable>
+
+	</p:overlayPanel>
+</ui:composition>

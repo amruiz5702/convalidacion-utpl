@@ -9,6 +9,10 @@
 		<property name="hbm2ddl.auto">update</property>		
 		
 		<mapping class="ec.edu.utpl.modelo.entidad.EntidadAlumno" />
+		<mapping class="ec.edu.utpl.modelo.entidad.EntidadComponente" />
+		<mapping class="ec.edu.utpl.modelo.entidad.EntidadConvalidacion" />
+		<mapping class="ec.edu.utpl.modelo.entidad.EntidadContenido" />
+		<mapping class="ec.edu.utpl.modelo.entidad.EntidadDetalleConvalidacion" />
 		<mapping class="ec.edu.utpl.modelo.entidad.EntidadDocente" />
 		<mapping class="ec.edu.utpl.modelo.entidad.EntidadPersistenciaLogin" />
 		<mapping class="ec.edu.utpl.modelo.entidad.EntidadUsuario" />

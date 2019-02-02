@@ -13,8 +13,8 @@
 		<jsf-version>2.3</jsf-version>
 		<servlet-version>4.0.0</servlet-version>
 		<cdi-version>2.0</cdi-version>
-		<primefaces-version>6.2.12</primefaces-version>
-		<primefacese-version>6.2</primefacese-version>
+		<primefaces-version>7.0</primefaces-version>
+		<primefacese-version>6.2.10</primefacese-version>
 		<springs-version>5.0.2.RELEASE</springs-version>
 		<springf-version>5.0.4.RELEASE</springf-version>
 		<springw-version>2.5.0.RC1</springw-version>
@@ -24,6 +24,8 @@
 		<log4j-jackson-version>2.9.4</log4j-jackson-version>
 		<omnifaces-version>1.5</omnifaces-version>
 		<jmail-version>1.4.7</jmail-version>
+		<poi-excel>4.0.1</poi-excel>
+		<itext.version>7.1.4</itext.version>
 	</properties>
 	<dependencies>
 		<!-- JSF API -->
@@ -63,7 +65,7 @@
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
 			<artifactId>resources-ckeditor</artifactId>
-			<version>6.2.4</version>
+			<version>${primefacese-version}</version>
 		</dependency>
 		<!-- FONTAWESOME API -->
 		<!--<dependency> <groupId>org.webjars</groupId> <artifactId>font-awesome</artifactId> 
@@ -199,6 +201,29 @@
 					<artifactId>cdi-api</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi-excel}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi-excel}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.edduarte</groupId>
+			<artifactId>similarity-search-java</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext7-core</artifactId>
+			<version>${itext.version}</version>
+			<type>pom</type>
 		</dependency>
 
 	</dependencies>

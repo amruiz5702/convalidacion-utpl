@@ -51,7 +51,8 @@ public class ControladorAlumno extends Controlador<EntidadAlumno> implements Ser
 	}
 
 	public void cmmdBtnBuscarAlumno(ActionEvent actionEvent) {
-		lstAlumno = alumnoServicio.buscarPorPropiedades(busquedaAlumno);
+		lstAlumno = alumnoServicio.buscarPorPropiedades(busquedaAlumno.getIdentificacionAlumno(),
+				busquedaAlumno.getNombreAlumno(), busquedaAlumno.getApellidoAlumno());
 		if (lstAlumno.isEmpty()) {
 			UtilitarioMensajeFace.agregarMensaje("alumnoNoEncontrado", null, FacesMessage.SEVERITY_ERROR);
 		}

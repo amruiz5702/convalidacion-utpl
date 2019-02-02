@@ -20,7 +20,7 @@ public class EntidadAlumno extends Entidad implements Serializable, Cloneable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_alumno")
-	private int idAlumno;
+	private Integer idAlumno;
 
 	@Column(name = "identificacion_alumno", nullable = false, length = 10)
 	private String identificacionAlumno;
@@ -43,11 +43,11 @@ public class EntidadAlumno extends Entidad implements Serializable, Cloneable {
 	@Transient
 	private String nombreCompletoAlumno;
 
-	public int getIdAlumno() {
+	public Integer getIdAlumno() {
 		return idAlumno;
 	}
 
-	public void setIdAlumno(int idAlumno) {
+	public void setIdAlumno(Integer idAlumno) {
 		this.idAlumno = idAlumno;
 	}
 
@@ -112,11 +112,13 @@ public class EntidadAlumno extends Entidad implements Serializable, Cloneable {
 		return new StringBuilder().append(apellidoAlumno).append(separador).append(nombreAlumno).toString();
 	}
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idAlumno;
+		result = prime * result + ((idAlumno == null) ? 0 : idAlumno.hashCode());
 		return result;
 	}
 
@@ -129,7 +131,10 @@ public class EntidadAlumno extends Entidad implements Serializable, Cloneable {
 		if (getClass() != obj.getClass())
 			return false;
 		EntidadAlumno other = (EntidadAlumno) obj;
-		if (idAlumno != other.idAlumno)
+		if (idAlumno == null) {
+			if (other.idAlumno != null)
+				return false;
+		} else if (!idAlumno.equals(other.idAlumno))
 			return false;
 		return true;
 	}
@@ -141,7 +146,6 @@ public class EntidadAlumno extends Entidad implements Serializable, Cloneable {
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
-
 		return clone;
 	}
 }
