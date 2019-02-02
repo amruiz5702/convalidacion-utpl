@@ -37,6 +37,21 @@ body {
       }
     }
   }
+
+  &.ui-state-default {
+    &.green-button {
+        background-color: $greenButton;
+        border-color: $greenButtonBorder;
+        
+        &.ui-state-hover {
+            background-color: $greenButtonHover;
+        }
+        
+        &.ui-state-active {
+            background-color: $greenButtonActive;
+        }
+    }
+} 
 }
 
 
