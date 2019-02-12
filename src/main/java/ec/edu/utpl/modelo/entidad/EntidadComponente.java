@@ -26,6 +26,9 @@ public class EntidadComponente extends Entidad implements Serializable, Cloneabl
 	@Column(name = "id_componente")
 	private Integer idComponente;
 
+	@Column(name = "codigo_componente", nullable = false, length = 30)
+	private String codigoComponente;
+
 	@Column(name = "nombre_componente", nullable = false, columnDefinition = "text")
 	private String nombreComponente;
 
@@ -88,6 +91,14 @@ public class EntidadComponente extends Entidad implements Serializable, Cloneabl
 
 	public void setLstContenido(List<EntidadContenido> lstContenido) {
 		this.lstContenido = lstContenido;
+	}
+
+	public String getCodigoComponente() {
+		return codigoComponente;
+	}
+
+	public void setCodigoComponente(String codigoComponente) {
+		this.codigoComponente = codigoComponente;
 	}
 
 	@Override

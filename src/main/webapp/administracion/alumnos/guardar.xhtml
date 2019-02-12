@@ -39,7 +39,7 @@
 						placeholder="#{vista.plcHldrNombresAlumno}"
 						value="#{controladorAlumno.instanciaEntidad.nombreAlumno}"
 						required="true">
-						<p:keyFilter mask="alpha" />
+						<p:keyFilter regEx="/[a-z ]/i"/>
 					</p:inputText>
 
 					<p:outputLabel for="txtApellidos"
@@ -48,7 +48,7 @@
 						placeholder="#{vista.plcHldrApellidosAlumno}"
 						value="#{controladorAlumno.instanciaEntidad.apellidoAlumno}"
 						required="true">
-						<p:keyFilter mask="alpha" />
+						<p:keyFilter regEx="/[a-z ]/i"/>
 					</p:inputText>
 
 				</p:panelGrid>
