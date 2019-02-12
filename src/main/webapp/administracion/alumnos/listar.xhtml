@@ -40,7 +40,7 @@
 							<p:inputText id="txtNombres" maxlength="80"
 								placeholder="#{vista.plcHldrNombresAlumno}"
 								value="#{controladorAlumno.busquedaAlumno.nombreAlumno}">
-								<p:keyFilter mask="alpha" />
+								<p:keyFilter regEx="/[a-z ]/i" />
 							</p:inputText>
 
 							<p:outputLabel for="txtApellidos"
@@ -48,7 +48,7 @@
 							<p:inputText id="txtApellidos" maxlength="80"
 								placeholder="#{vista.plcHldrApellidosAlumno}"
 								value="#{controladorAlumno.busquedaAlumno.apellidoAlumno}">
-								<p:keyFilter mask="alpha" />
+								<p:keyFilter regEx="/[a-z ]/i" />
 							</p:inputText>
 
 						</p:panelGrid>
@@ -138,10 +138,10 @@
 						});
 					</script>
 					<style type="text/css">
-						.ui-datatable .ui-datatable-header {
-							text-align: right !important;
-						}
-					</style>
+.ui-datatable .ui-datatable-header {
+	text-align: right !important;
+}
+</style>
 				</h:form>
 
 

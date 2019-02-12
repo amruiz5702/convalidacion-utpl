@@ -127,7 +127,7 @@
 											styleClass="textBold fontSize15" />
 										<p:selectOneRadio id="rbtnSimilitud"
 											value="#{controladorConvalidacion.instanciaEntidad.medidaSimilitudConvalidacion}"
-											layout="responsive" columns="3" required="true">
+											layout="responsive" columns="3" required="true" disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}">
 											<f:selectItem itemLabel="JACCARD" itemValue="JACCARD" />
 											<f:selectItem itemLabel="MINHASH" itemValue="MINHASH" />
 											<f:selectItem itemLabel="LSH" itemValue="LSH" />
@@ -150,7 +150,7 @@
 										<p:slider id="sldrPorcentajeUmbral"
 											widgetVar="wsldrPorcentajeUmbral" for="txtPorcentajeUmbral"
 											display="output" maxValue="100"
-											displayTemplate="Porcentaje de %{value}">
+											displayTemplate="Porcentaje de %{value}" disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}">
 											<p:ajax event="slideEnd"
 												listener="#{controladorConvalidacion.cmmdBtnRevisarConvalidacion(sl)}"
 												update=":frmGuardarConvalidacion:detalleConvalidacionTable pnlButtonConvalidacion"
@@ -166,6 +166,7 @@
 										<p:commandButton value="#{vista.cmmdBtnRevisar}"
 											icon="fa fa-fw fa-gear"
 											update=":frmGuardarConvalidacion:detalleConvalidacionTable pnlButtonConvalidacion"
+											disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}"
 											actionListener="#{controladorConvalidacion.cmmdBtnRevisarConvalidacion}" />
 
 										<ui:include
@@ -234,7 +235,7 @@
 
 							<p:commandButton value="#{vista.cmmdBtnImprimir}"
 								icon="fa fa-print" styleClass="green-button"
-								actionListener="#{visualizarConvalidacion.cmmdBtnDescargarDocumento}"
+								actionListener="#{visualizarConvalidacion.cmmdBtnDescargarDocumento(controladorConvalidacion.instanciaEntidad)}"
 								disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion eq null}"
 								update=":dlgVisualizarConvalidacion"
 								oncomplete="PF('wdlgVisualizarConvalidacion').show()" />
