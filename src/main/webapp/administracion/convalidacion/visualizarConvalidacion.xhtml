@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:dialog header="Visualizar Convalidación"
+		id="dlgVisualizarConvalidacion" appendTo="@(body)"
+		styleClass="col-xs-12 col-sm-11 col-md-10 col-lg-8"
+		widgetVar="wdlgVisualizarConvalidacion" minHeight="40" modal="true"
+		fitViewport="true" responsive="true">
+		<pe:documentViewer zoom="100" value="#{visualizarConvalidacion.file}"
+			height="600" />
+	</p:dialog>
+</ui:composition>
