@@ -41,21 +41,24 @@ import ec.edu.utpl.modelo.entidad.EntidadDetalleConvalidacion;
 
 @Named
 @SessionScope
-public class visualizarConvalidacion extends Controlador<EntidadConvalidacion> implements Serializable {
+public class ControladorVisualizarConvalidacion extends Controlador<EntidadConvalidacion> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final String STR_TITLE_UNIVERSIDAD = "UNIVERSIDAD TÉCNICA PARTICULAR DE LOJA";
 	private static final String STR_SUBTITLE_UNIVERSIDAD = "Universidad Católica de Loja";
 
-	private StreamedContent file;
+	private StreamedContent reporteConvalidacion;
 
-	public StreamedContent getFile() {
-		return file;
+
+	public StreamedContent getReporteConvalidacion() {
+		return reporteConvalidacion;
 	}
 
-	public void setFile(StreamedContent file) {
-		this.file = file;
+
+	public void setReporteConvalidacion(StreamedContent reporteConvalidacion) {
+		this.reporteConvalidacion = reporteConvalidacion;
 	}
+
 
 	public void cmmdBtnDescargarDocumento(EntidadConvalidacion convalidacion) throws IOException {
 
@@ -198,7 +201,7 @@ public class visualizarConvalidacion extends Controlador<EntidadConvalidacion> i
 		document.add(prphFirma);
 		document.close();
 
-		setFile(new DefaultStreamedContent(new ByteArrayInputStream(outStream.toByteArray()), "application/pdf"));
+		setReporteConvalidacion(new DefaultStreamedContent(new ByteArrayInputStream(outStream.toByteArray()), "application/pdf"));
 	}
 }
 

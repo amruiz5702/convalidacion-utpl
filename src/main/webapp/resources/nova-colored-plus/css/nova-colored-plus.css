@@ -39,6 +39,16 @@ body .ui-button.ui-state-default.green-button.ui-state-hover {
 body .ui-button.ui-state-default.green-button.ui-state-active {
   background-color: #178544;
 }
+body .ui-button.ui-state-default.green-button {
+  background-color: #1f9e53;
+  border-color: #107533;
+}
+body .ui-button.ui-state-default.green-button.ui-state-hover {
+  background-color: #2eb971;
+}
+body .ui-button.ui-state-default.green-button.ui-state-active {
+  background-color: #178544;
+}
 body .ui-datepicker .ui-datepicker-calendar {
   font-size: 12px;
 }
@@ -54,6 +64,9 @@ body .ui-trigger-calendar .ui-datepicker-trigger.ui-button {
 }
 body .ui-dialog .ui-dialog-title {
   font-size: 19px;
+}
+body .ui-panel .ui-panel-title {
+  font-size: 14px;
 }
 
 .badge {

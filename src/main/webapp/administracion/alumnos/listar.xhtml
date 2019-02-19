@@ -61,7 +61,7 @@
 								update=":growl :frmLstAlumno" icon="fa fa-search"
 								actionListener="#{controladorAlumno.cmmdBtnBuscarAlumno}" />
 							<p:commandButton value="#{vista.cmmdBtnCancelar}"
-								immediate="true" update="fstBusquedaAlumno"
+								immediate="true" update=":frmLstAlumno"
 								actionListener="#{controladorAlumno.evtPrepararInstaciaBusquedaAlumno}"
 								styleClass="red-button" icon="fa fa-times" resetValues="true" />
 						</p:column>

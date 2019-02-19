@@ -182,6 +182,7 @@ public class ControladorConvalidacion extends Controlador<EntidadConvalidacion> 
 
 	private void prepararInstanciaConvalidacion() throws InstantiationException, IllegalAccessException {
 		this.setInstanciaEntidad(interfaceConvalidacionServicio.generarNuevaInstancia());
+		this.setIptStrmDocumentoExcel(null);
 	}
 
 }
