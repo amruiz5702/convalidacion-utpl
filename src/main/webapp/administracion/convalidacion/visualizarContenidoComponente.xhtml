@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hm="http://xmlns.jcp.org/jsf/composite/componente">
+
+	<p:overlayPanel id="ovpnlContenidoComponente"
+		widgetVar="wovpnlContenidoComponente" hideEffect="fade" dynamic="true"
+		style="width:800px" dismissable="false" showCloseIcon="true">
+		<p:outputLabel
+			value="#{controladorConvalidacion.entidadDetalleConvalidacion.componente.nombreComponente}"
+			styleClass="textBold fontSize14" />
+		<br />
+		<p:dataTable var="contenido" id="dtContentidoComponente"
+			rowIndexVar="rowIndex"
+			value="#{controladorConvalidacion.entidadDetalleConvalidacion.componente.lstContenido}"
+			rows="6" paginator="true" paginatorPosition="bottom">
+			<p:column headerText="N°" width="50">
+               	#{rowIndex+1}
+           	</p:column>
+
+			<p:column headerText="CONTENIDO ACADÉMICO">
+				<h:outputText value="#{contenido.descripcionContenido}" />
+			</p:column>
+
+		</p:dataTable>
+
+	</p:overlayPanel>
+</ui:composition>

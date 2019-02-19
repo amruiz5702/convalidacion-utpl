@@ -43,7 +43,7 @@
 
 									<p:column>
 										<p:inputText id="txtIdentificación" maxlength="10"
-											style="width: 90%"
+											style="width: 80%"
 											placeholder="#{vista.plcHldrIdentificacionAlumno}"
 											value="#{controladorConvalidacion.instanciaEntidad.entidadAlumno.identificacionAlumno}"
 											required="true">
@@ -53,7 +53,8 @@
 										<p:commandButton icon="fa fa-search"
 											process="pnlBusquedaEstudiante @this"
 											update="pnlBusquedaEstudiante outPnlCargarMateria"
-											actionListener="#{controladorConvalidacion.cmmdBtnBuscarAlumnoPorCedula}" />
+											actionListener="#{controladorConvalidacion.cmmdBtnBuscarAlumnoPorCedula}"
+											disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}" />
 									</p:column>
 
 									<p:outputLabel for="txtNombresAlumno" styleClass="textBold"
@@ -91,6 +92,7 @@
 											styleClass="textBold fontSize14" />
 										<p:fileUpload widgetVar="wflUldMateriasAprobadas"
 											id="flUldMateriasAprobadas"
+											disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}"
 											fileUploadListener="#{controladorConvalidacion.evtSubirArchivo}"
 											update="@this outPnlCargarMateria outPnlMedidaSimilitud"
 											mode="advanced" auto="true"
@@ -107,7 +109,8 @@
 										<p:commandButton id="btnVerMateriasAprobadas"
 											disabled="#{controladorConvalidacion.iptStrmDocumentoExcel eq null}"
 											value="#{vista.cmmdBtnVer}" icon="fa fa-align-justify"
-											type="button" />
+											process="@this"
+											oncomplete="PF('wovpnlMateriasAprobadas').show('#{component.clientId}')" />
 									</p:panelGrid>
 								</p:outputPanel>
 
@@ -127,10 +130,12 @@
 											styleClass="textBold fontSize15" />
 										<p:selectOneRadio id="rbtnSimilitud"
 											value="#{controladorConvalidacion.instanciaEntidad.medidaSimilitudConvalidacion}"
-											layout="responsive" columns="3" required="true" disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}">
+											layout="responsive" columns="3" required="true"
+											disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}">
 											<f:selectItem itemLabel="JACCARD" itemValue="JACCARD" />
 											<f:selectItem itemLabel="MINHASH" itemValue="MINHASH" />
-											<f:selectItem itemLabel="LSH" itemValue="LSH" />
+											<!--  <f:selectItem itemLabel="LSH" itemValue="LSH" />-->
+											<f:selectItem itemLabel="LEVENSHTEIN" itemValue="LEVENSHTEIN" />
 										</p:selectOneRadio>
 									</p:panelGrid>
 
@@ -150,7 +155,8 @@
 										<p:slider id="sldrPorcentajeUmbral"
 											widgetVar="wsldrPorcentajeUmbral" for="txtPorcentajeUmbral"
 											display="output" maxValue="100"
-											displayTemplate="Porcentaje de %{value}" disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}">
+											displayTemplate="Porcentaje de %{value}"
+											disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}">
 											<p:ajax event="slideEnd"
 												listener="#{controladorConvalidacion.cmmdBtnRevisarConvalidacion(sl)}"
 												update=":frmGuardarConvalidacion:detalleConvalidacionTable pnlButtonConvalidacion"
@@ -168,9 +174,6 @@
 											update=":frmGuardarConvalidacion:detalleConvalidacionTable pnlButtonConvalidacion"
 											disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}"
 											actionListener="#{controladorConvalidacion.cmmdBtnRevisarConvalidacion}" />
-
-										<ui:include
-											src="/administracion/convalidacion/visualizarMateriasAprobadas.xhtml" />
 
 									</p:panelGrid>
 
@@ -203,11 +206,23 @@
 										value="#{detalle.componente eq null ? 'No supera umbral %'.concat( controladorConvalidacion.instanciaEntidad.porcentajeUmbralConvalidacion) : detalle.componente.nombreComponente }" />
 									<br />
 									<p:commandLink
+										oncomplete="PF('wovpnlContenidoComponente').show('#{component.clientId}')"
+										disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}"
+										rendered="#{detalle.componente ne null}"
+										title="Visualizar contenido" value="Visualizar contenido"
+										update=":ovpnlContenidoComponente">
+										<f:setPropertyActionListener value="#{detalle}"
+											target="#{controladorConvalidacion.entidadDetalleConvalidacion}" />
+									</p:commandLink>
+									<p:commandLink
 										actionListener="#{controladorConvalidacion.cmmdBtnPrepararConvalidacionContenido(detalle)}"
+										disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion ne null}"
 										oncomplete="PF('wdlgConvalidaContenido').show();"
+										update=":frmConvalidaContenido"
 										rendered="#{detalle.componente eq null}"
-										title="Validar con contenido">
-										<i class="fa fa-search fontSize14" />
+										title="Convalidar por contenido"
+										value="Convalidar por contenido">
+
 									</p:commandLink>
 								</p:column>
 
@@ -235,7 +250,7 @@
 
 							<p:commandButton value="#{vista.cmmdBtnImprimir}"
 								icon="fa fa-print" styleClass="green-button"
-								actionListener="#{visualizarConvalidacion.cmmdBtnDescargarDocumento(controladorConvalidacion.instanciaEntidad)}"
+								actionListener="#{controladorVisualizarConvalidacion.cmmdBtnDescargarDocumento(controladorConvalidacion.instanciaEntidad)}"
 								disabled="#{controladorConvalidacion.instanciaEntidad.idConvalidacion eq null}"
 								update=":dlgVisualizarConvalidacion"
 								oncomplete="PF('wdlgVisualizarConvalidacion').show()" />
@@ -247,9 +262,13 @@
 						</div>
 					</h:form>
 					<ui:include
-						src="/administracion/convalidacion/validarPorContenido.xhtml" />
+						src="/administracion/convalidacion/convalidarPorContenido.xhtml" />
 					<ui:include
-						src="/administracion/convalidacion/visualizarConvalidacion.xhtml" />
+						src="/administracion/convalidacion/visualizarReporteConvalidacion.xhtml" />
+					<ui:include
+							src="/administracion/convalidacion/visualizarMateriasAprobadas.xhtml" />
+					<ui:include
+							src="/administracion/convalidacion/visualizarContenidoComponente.xhtml" />
 
 				</div>
 			</div>

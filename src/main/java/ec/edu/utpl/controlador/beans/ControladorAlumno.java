@@ -1,6 +1,7 @@
 package ec.edu.utpl.controlador.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -109,6 +110,7 @@ public class ControladorAlumno extends Controlador<EntidadAlumno> implements Ser
 
 	private void prepararInstanciaBusquedaAlumno() throws InstantiationException, IllegalAccessException {
 		this.setBusquedaAlumno(alumnoServicio.generarNuevaInstancia());
+		this.setLstAlumno(new ArrayList<EntidadAlumno>());
 	}
 
 	private void prepararInstanciaAlumno() throws InstantiationException, IllegalAccessException {

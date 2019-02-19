@@ -55,6 +55,9 @@ body .ui-trigger-calendar .ui-datepicker-trigger.ui-button {
 body .ui-dialog .ui-dialog-title {
   font-size: 19px;
 }
+body .ui-panel .ui-panel-title {
+  font-size: 14px;
+}
 
 .badge {
   padding: 5px;

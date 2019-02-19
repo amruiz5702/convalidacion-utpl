@@ -29,6 +29,7 @@ import ec.edu.utpl.modelo.entidad.EntidadContenido;
 import ec.edu.utpl.modelo.entidad.EntidadConvalidacion;
 import ec.edu.utpl.modelo.entidad.EntidadDetalleConvalidacion;
 import ec.edu.utpl.servicio.interfase.InterfaceConvalidacionServicio;
+import ec.edu.utpl.utilitario.UtilitarioLevenshtein;
 
 @Service
 public class ImplementacionConvalidacionServicio implements InterfaceConvalidacionServicio<EntidadConvalidacion> {
@@ -147,7 +148,10 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 							entidadTemp.getNombreComponente().toLowerCase());
 					break;
 				case "LSH":
-					umbralReal = Similarity.lsh().of(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
+					umbralReal =  Similarity.lsh().of(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
+							entidadTemp.getNombreComponente().toLowerCase());
+				case "LEVENSHTEIN":
+					umbralReal = UtilitarioLevenshtein.similarity(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
 							entidadTemp.getNombreComponente().toLowerCase());
 					break;
 				}
@@ -207,6 +211,11 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 				umbralReal = Similarity.lsh().of(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
 						entidadContenidoTemp.getDescripcionContenido().toLowerCase());
 				break;
+			case "LEVENSHTEIN":
+				umbralReal = UtilitarioLevenshtein.similarity(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
+						entidadContenidoTemp.getDescripcionContenido().toLowerCase());
+				break;
+				
 			}
 			System.out.println("Revisando " + entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase()
 					+ " ========>  " + entidadComponente.getNombreComponente() + " ========>  "
@@ -217,7 +226,7 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 				entidadContenido = entidadContenidoTemp;
 			}
 
-			if (umbralReal > umbralMayor) {
+			if (umbralReal >= umbralMayor) {
 				umbralMayor = umbralReal;
 				entidadContenido = entidadContenidoTemp;
 			}
@@ -230,9 +239,10 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 					"Se convalida por similitud de contenido " + entidadContenido.getDescripcionContenido());
 			System.out.println(" Se convalida " + entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase()
 					+ " con " + entidadComponente.getNombreComponente() + ", por un % de " + umbralMayor);
-		} else {
+		}else {
 			entidadDetalleConvalidacion.setUmbralConvalidacion(0.0);
 			entidadDetalleConvalidacion.setComponente(null);
+			entidadDetalleConvalidacion.setDescripcionDetalleConvalidacion(null);;
 		}
 		return entidadDetalleConvalidacion;
 	}
