@@ -29,7 +29,8 @@ import ec.edu.utpl.modelo.entidad.EntidadContenido;
 import ec.edu.utpl.modelo.entidad.EntidadConvalidacion;
 import ec.edu.utpl.modelo.entidad.EntidadDetalleConvalidacion;
 import ec.edu.utpl.servicio.interfase.InterfaceConvalidacionServicio;
-import ec.edu.utpl.utilitario.UtilitarioLevenshtein;
+import info.debatty.java.stringsimilarity.Jaccard;
+import info.debatty.java.stringsimilarity.NormalizedLevenshtein;
 
 @Service
 public class ImplementacionConvalidacionServicio implements InterfaceConvalidacionServicio<EntidadConvalidacion> {
@@ -140,7 +141,7 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 
 				switch (nombreAlgoritmo) {
 				case "JACCARD":
-					umbralReal = Similarity.jaccard().of(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
+					umbralReal = new Jaccard().similarity(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
 							entidadTemp.getNombreComponente().toLowerCase());
 					break;
 				case "MINHASH":
@@ -151,7 +152,7 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 					umbralReal =  Similarity.lsh().of(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
 							entidadTemp.getNombreComponente().toLowerCase());
 				case "LEVENSHTEIN":
-					umbralReal = UtilitarioLevenshtein.similarity(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
+					umbralReal = new NormalizedLevenshtein().similarity(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
 							entidadTemp.getNombreComponente().toLowerCase());
 					break;
 				}
@@ -212,7 +213,7 @@ public class ImplementacionConvalidacionServicio implements InterfaceConvalidaci
 						entidadContenidoTemp.getDescripcionContenido().toLowerCase());
 				break;
 			case "LEVENSHTEIN":
-				umbralReal = UtilitarioLevenshtein.similarity(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
+				umbralReal = new NormalizedLevenshtein().similarity(entidadDetalleConvalidacion.getMateriaAprobada().toLowerCase(),
 						entidadContenidoTemp.getDescripcionContenido().toLowerCase());
 				break;
 				

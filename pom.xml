@@ -226,6 +226,12 @@
 			<type>pom</type>
 		</dependency>
 
+		<dependency>
+			<groupId>info.debatty</groupId>
+			<artifactId>java-string-similarity</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
 	</dependencies>
 	<repositories>
 		<repository>

@@ -44,7 +44,8 @@ public class EntidadUsuario extends Entidad implements Serializable {
 	private boolean activoUsuario;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tbl_usuario_rol", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_rol"), foreignKey = @ForeignKey(name = "FK_ROL_USUARIO"), inverseForeignKey = @ForeignKey(name = "FK_USUARIO_ROL"))
+	@JoinTable(name = "tbl_usuario_rol", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_rol"), 
+	foreignKey = @ForeignKey(name = "FK_ROL_USUARIO"), inverseForeignKey = @ForeignKey(name = "FK_USUARIO_ROL"))
 	private List<EntidadRol> lstRoles = new ArrayList<EntidadRol>();
 
 	@OneToOne(cascade = CascadeType.ALL)

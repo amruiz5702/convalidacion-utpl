@@ -32,6 +32,8 @@
 		<security:custom-filter
 			ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 			
+		<security:intercept-url pattern="/administracion/alumnos/**"  access="hasAnyRole('SECRETARIA')" />
+		<security:intercept-url pattern="/administracion/convalidacion/**"  access="hasAnyRole('DOCENTE')" />
 		<security:intercept-url pattern="/administracion/**" access="isAuthenticated()" />
 
 		<security:form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?incorrecto=true" default-target-url="/administracion/dashboard.xhtml"
